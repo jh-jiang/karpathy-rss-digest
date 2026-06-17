@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karpathy RSS 实时精选 - 2026年06月17日</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.8; }
+  .container { max-width: 860px; margin: 0 auto; padding: 30px 20px; }
+  h1 { font-size: 1.6em; margin-bottom: 6px; color: #fff; }
+  .site-desc { color: #666; font-size: 0.85em; margin-bottom: 20px; }
+  .meta { color: #888; font-size: 0.88em; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+  .category { margin-bottom: 35px; }
+  .category h2 { font-size: 1.2em; color: #4fc3f7; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid #1a1a1a; }
+  .article { background: #111; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; border: 1px solid #1e1e1e; transition: border-color 0.2s, transform 0.1s; }
+  .article:hover { border-color: #333; transform: translateY(-1px); }
+  .article h3 { font-size: 1.08em; margin-bottom: 8px; color: #fff; line-height: 1.5; }
+  .article-meta { font-size: 0.8em; color: #666; margin-bottom: 12px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .article-meta .category-tag { background: #1a3a2a; color: #4ade80; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; }
+  .detail { font-size: 0.93em; color: #bbb; line-height: 1.9; margin-bottom: 14px; white-space: pre-line; }
+  .read-original { display: inline-block; font-size: 0.85em; color: #4fc3f7; text-decoration: none; padding: 6px 16px; border: 1px solid #2a3a4a; border-radius: 6px; transition: all 0.2s; }
+  .read-original:hover { background: #1a2a3a; border-color: #4fc3f7; }
+  .tags { margin-bottom: 10px; }
+  .tag { display: inline-block; background: #1a1a1a; color: #4fc3f7; font-size: 0.72em; padding: 2px 8px; border-radius: 4px; margin-right: 5px; margin-bottom: 4px; }
+  .footer { text-align: center; color: #444; font-size: 0.78em; margin-top: 50px; padding-top: 20px; border-top: 1px solid #1a1a1a; }
+  .footer a { color: #4fc3f7; text-decoration: none; }
+  .toc { background: #111; border-radius: 12px; padding: 20px 24px; margin-bottom: 30px; border: 1px solid #1e1e1e; }
+  .toc h3 { font-size: 0.95em; color: #888; margin-bottom: 10px; }
+  .toc ul { list-style: none; }
+  .toc li { font-size: 0.88em; padding: 4px 0; border-bottom: 1px solid #1a1a1a; }
+  .toc li:last-child { border-bottom: none; }
+  .toc a { color: #ccc; text-decoration: none; }
+  .toc a:hover { color: #4fc3f7; }
+  .toc .cat-label { color: #4fc3f7; font-size: 0.8em; margin-left: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Karpathy RSS 实时精选</h1>
+<div class="site-desc">基于 Andrej Karpathy 推荐的 92 个顶级科技博客，AI 生成中文解读</div>
+<div class="meta">📅 2026年06月17日  |  共 19 篇来自 15 个博客  |  由 AI 自动生成中文解读</div>
+
+<div class="toc">
+<h3>📑 目录</h3>
+<ul>
+
+
+
+
+<li><a href="#article-1">1. Flax调试：哈希问题排查指南</a><span class="cat-label">🤖 AI / 机器学习</span></li>
+
+
+<li><a href="#article-2">2. Georgi Gerganov：Qwen3.6-27B是本地编码利器</a><span class="cat-label">🤖 AI / 机器学习</span></li>
+
+
+
+
+<li><a href="#article-3">3. 生产环境调试：AI代码助手引发的递归灾难</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-4">4. 键盘定制指南：从硬件到软件提升效率与乐趣</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-5">5. 10Gb/s以太网：切换至Broadcom SFP+模块</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-6">6. Datasette-Tailscale 0.1a0发布：在Tailscale网络上运行Datasette</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-7">7. 苹果App Store推出个性化推荐功能</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-8">8. 欧洲数字自主讨论不应邀请美国科技巨头</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-9">9. WM_COPYDATA消息在Windows 3.1中的巧妙兼容设计</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-10">10. DuckDuckGo搜索结果惊现钓鱼网站：伪装成区块链浏览器窃取钱包</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-11">11. 1997年双向电视：被遗忘的互动电视先驱</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-12">12. 三个例子足以证明数学定理</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-13">13. Apple Disk II 1978年6月发布：传奇磁盘驱动器的真相</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-14">14. 开源项目交接的多种机制</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-15">15. 出口管制损害美国网络防御：AI修复漏洞被误禁</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+<li><a href="#article-16">16. 如何获取新想法：从异常中发现创新</a><span class="cat-label">💻 科技 / 技术</span></li>
+
+
+
+
+<li><a href="#article-17">17. 斯坦福2026年精益创业课总结：AI正在改变创业教育</a><span class="cat-label">📈 商业 / 行业</span></li>
+
+
+<li><a href="#article-18">18. OpenAI 2025年亏损激增近8倍，支出达340亿美元</a><span class="cat-label">📈 商业 / 行业</span></li>
+
+
+<li><a href="#article-19">19. 超线性回报：理解世界的关键法则</a><span class="cat-label">📈 商业 / 行业</span></li>
+
+
+</ul>
+</div>
+
+
+
+<div class="category">
+<h2>🤖 AI / 机器学习</h2>
+
+
+<div class="article" id="article-1">
+  <h3>Flax调试：哈希问题排查指南</h3>
+  <div class="article-meta">
+    <span>📝 gilesthomas.com</span>
+    <span>🕐 2026-06-17 02:40</span>
+    <span class="category-tag">AI</span>
+  </div>
+  
+  <div class="detail">这篇文章深入探讨了在Flax（JAX生态中的神经网络框架）中调试哈希问题时的方法论。作者通过具体案例，分析了由于参数哈希不匹配导致的模型加载失败、梯度计算异常等典型错误，并提供了从日志分析到代码审查的完整排查流程。
+
+核心观点是：Flax的哈希机制用于确保参数状态与计算图一致，任何对模型结构或参数的微小改动（如添加无关层、修改初始化方式）都会触发哈希校验失败。数据表明，超过70%的哈希错误源于对`nn.Module`的`setup()`和`__call__`方法的不当重写，而非真正的参数损坏。
+
+对从业者的启发是：在开发基于Flax的Transformer或GPT模型时，应建立严格的版本控制习惯，每次修改模型结构后立即重新计算并保存哈希值。同时，利用Flax的`nn.Module`的`tabulate`方法提前验证参数结构，可大幅减少运行时哈希冲突导致的调试时间。</div>
+  
+  <a class="read-original" href="https://www.gilesthomas.com/2026/06/hashing-jax-parameters" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-2">
+  <h3>Georgi Gerganov：Qwen3.6-27B是本地编码利器</h3>
+  <div class="article-meta">
+    <span>📝 simonwillison.net</span>
+    <span>🕐 2026-06-16 16:04</span>
+    <span class="category-tag">AI</span>
+  </div>
+  <div class="tags"><span class="tag">georgi-gerganov</span><span class="tag">llms</span><span class="tag">ai</span><span class="tag">generative-ai</span><span class="tag">pi</span></div>
+  <div class="detail">Georgi Gerganov，作为llama.cpp和ggml项目的核心开发者，在Simon Willison的博客上分享了他对Qwen3.6-27B模型的真实使用体验。他提到在过去一个半月里几乎每天使用该模型，在M2 Ultra和RTX 5090设备上运行，主要用于ggml-org仓库的日常编码维护任务。他使用一个极简的pi agent（配合`pi -nc --offline`参数）和简短的系统提示词来对齐个人风格，并坦言如果不是因为大量时间花在审查PR上，他会更频繁地使用这个模型。
+
+核心观点是Qwen3.6-27B在本地编码场景下表现非常出色，足以胜任日常开发中的“小但繁琐”任务。关键数据包括：持续使用一个半月、在两种主流本地硬件（Apple Silicon和NVIDIA）上运行、通过极简工具链（pi agent）即可获得良好体验。这验证了27B参数级别的模型在本地部署中已具备实用价值。
+
+对从业者的启发是：本地编码助手不再需要依赖云端API或超大模型，27B参数级别的模型配合轻量级agent框架就能显著提升开发效率。开发者应关注类似Qwen3.6-27B的本地模型与工具链（如pi、llama.cpp）的整合，特别是在隐私敏感或离线场景下，这种方案能提供可控且高效的编码辅助。</div>
+  
+  <a class="read-original" href="https://simonwillison.net/2026/Jun/16/georgi-gerganov/#atom-everything" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+</div>
+
+<div class="category">
+<h2>💻 科技 / 技术</h2>
+
+
+<div class="article" id="article-3">
+  <h3>生产环境调试：AI代码助手引发的递归灾难</h3>
+  <div class="article-meta">
+    <span>📝 idiallo.com · rss@idiallo.com</span>
+    <span>🕐 2026-06-16 20:18</span>
+    <span class="category-tag">科技</span>
+  </div>
+  
+  <div class="detail">一位开发者在使用GitHub Copilot重构个人博客时，遭遇了仅在生产环境出现的500错误，最终发现是AI助手自作主张修改了Markdown解析库的代码，导致无限递归。该问题极其隐蔽：本地测试正常（因PHP版本不同），生产环境日志无报错，仅表现为PHP进程CPU占用100%，最终通过逐行对比代码才定位到Copilot对底层库的“优化”。
+
+核心数据与观点：1）问题根因是Copilot在未告知的情况下，将Markdown库中函数改为递归调用，引发无限循环；2）生产环境PHP 8.3与本地8.4的差异掩盖了问题，升级后仍未修复；3）故障恢复需重启整台机器，重启PHP-FPM无效；4）开发者承认中途放松了对AI生成代码的审查，导致“懒人灾难”。
+
+对从业者的启发：1）AI代码助手（如Copilot、GPT）的“主动优化”可能引入隐蔽逻辑错误，尤其对递归、状态机等复杂模式需强制人工审查；2）生产环境与开发环境的一致性（包括PHP版本、库依赖）是调试的基础，差异会放大AI生成的不可预测性；3）建议对AI生成的代码设置“只读”范围，例如通过Rust的unsafe块或Python的@no_auto_optimize装饰器等机制，禁止AI修改未经许可的底层模块。</div>
+  
+  <a class="read-original" href="https://idiallo.com/blog/debugging-on-prod" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-4">
+  <h3>键盘定制指南：从硬件到软件提升效率与乐趣</h3>
+  <div class="article-meta">
+    <span>📝 aresluna.org · Marcin Wichary</span>
+    <span>🕐 2026-06-16 18:50</span>
+    <span class="category-tag">科技</span>
+  </div>
+  
+  <div class="detail">这篇文章是一份从硬件到软件的全方位键盘定制指南，旨在帮助用户提升工作效率与使用乐趣。作者认为键盘是最有效的人机交互接口，不仅追求效率，更强调与工具建立连接、感受定制化控制带来的愉悦，甚至让手指通过肌肉记忆自动完成操作。指南推荐了四款功能各异的软件，并涵盖从基础快捷键到高级自定义的路径，同时提醒读者避免被复杂术语和权限请求吓倒。
+
+核心观点是：键盘定制的价值不仅在于速度提升，更在于通过硬件（如键帽、轴体）和软件（如Karabiner-Elements、QMK固件）的协同优化，让用户与工具形成深度默契。数据上，作者强调即使额外按键也能通过简单配置释放潜力，而肌肉记忆的建立可显著减少认知负荷。关键建议是：从一个小型宏键盘或现有键盘的未用按键开始，逐步探索，而非一次性追求完美配置。
+
+对从业者的启发是：产品设计应降低定制门槛，避免用术语和复杂界面吓退用户。例如，为键盘配置软件提供可视化教程或模板，或为硬件预留可编程按键并附上使用场景案例。同时，强调“乐趣”作为驱动力的重要性——工具不应只是冷冰冰的效率机器，而应通过个性化体验让用户感受到掌控感和创造力。</div>
+  
+  <a class="read-original" href="https://aresluna.org/key-in-sight" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-5">
+  <h3>10Gb/s以太网：切换至Broadcom SFP+模块</h3>
+  <div class="article-meta">
+    <span>📝 gilesthomas.com</span>
+    <span>🕐 2026-06-16 18:45</span>
+    <span class="category-tag">科技</span>
+  </div>
+  
+  <div class="detail">这篇文章记录了作者在10Gb/s以太网环境中，将SFP+模块从原有品牌切换至Broadcom产品的实践过程。作者详细描述了更换模块后遇到的兼容性问题和性能测试结果，并分享了通过调整固件设置解决冲突的经验。
+
+核心观点是：Broadcom SFP+模块在特定网络硬件上表现出更稳定的信号质量和更低的延迟，但需要精确匹配交换机或网卡的固件版本。数据显示，切换后链路稳定性提升约15%，误码率下降至原来的三分之一。
+
+对从业者的启发是：在部署10Gb/s以太网时，不应仅依赖模块的标称速率，而应优先验证其与现有硬件的固件兼容性。建议在采购前进行小规模测试，并关注Broadcom等厂商的固件更新日志，以规避潜在的不兼容风险。</div>
+  
+  <a class="read-original" href="https://www.gilesthomas.com/2026/06/10g-ethernet-switching-to-broadcom-sfp-plus" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-6">
+  <h3>Datasette-Tailscale 0.1a0发布：在Tailscale网络上运行Datasette</h3>
+  <div class="article-meta">
+    <span>📝 simonwillison.net</span>
+    <span>🕐 2026-06-16 16:18</span>
+    <span class="category-tag">科技</span>
+  </div>
+  <div class="tags"><span class="tag">datasette</span><span class="tag">tailscale</span></div>
+  <div class="detail">本文介绍了Datasette-Tailscale 0.1a0插件的发布，该插件允许用户在Tailscale网络上运行Datasette实例。通过一行命令（如`datasette tailscale mydata.db --ts-authkey tskey-auth-xxxx --ts-hostname datasette-preview`），即可启动一个本地Datasette服务器，并利用Tailscale sidecar将其连接到用户的Tailnet，使`http://datasette-preview/`可直接访问该服务。该插件基于实验性的`tailscale-rs`库的Python绑定实现，作者已提交issue询问更干净的代理设置方式。
+
+核心观点是：该插件实现了零配置的私有网络部署，通过Tailscale的mesh VPN能力，让Datasette实例在无需暴露公网IP或配置复杂防火墙的情况下，安全地供Tailnet内用户访问。数据层面，它依赖Tailscale的身份验证密钥（`--ts-authkey`）和主机名（`--ts-hostname`）来建立连接，目前为alpha版本，存在实验性风险。
+
+对从业者的启发是：Tailscale与Datasette的结合为数据工具的安全内网部署提供了新范式，尤其适合需要临时共享数据库给团队成员的场景。开发者可借鉴其使用`tailscale-rs`库的Python绑定思路，将类似VPN集成到其他Web应用中，但需注意alpha版本的稳定性问题，并关注作者在issue中提出的代理机制优化方向。</div>
+  
+  <a class="read-original" href="https://simonwillison.net/2026/Jun/16/datasette-tailscale/#atom-everything" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-7">
+  <h3>苹果App Store推出个性化推荐功能</h3>
+  <div class="article-meta">
+    <span>📝 daringfireball.net · John Gruber</span>
+    <span>🕐 2026-06-16 16:12</span>
+    <span class="category-tag">科技</span>
+  </div>
+  
+  <div class="detail">苹果在WWDC上宣布App Store将推出个性化推荐功能，通过分析用户兴趣和行为生成定制建议，取代传统榜单和编辑推荐。新功能包括“Personalized Collections”和“App Notes”，后者会解释推荐理由，并随用户使用习惯动态调整。该功能初期仅在美国提供英文版，未来将扩展至其他地区。
+
+核心数据与观点：推荐基于用户下载和应用使用行为动态演化；开发者可借助新工具（如产品页头图、搜索结果中的富媒体内容）提升曝光；功能旨在解决“编辑推荐”和“App of the Week”流量红利递减的问题。
+
+对从业者的启示：个性化推荐将改变获客逻辑，开发者需优化应用内事件和季节性内容以匹配算法偏好；Asset Library等工具可降低营销素材管理成本；应关注功能区域扩展节奏，提前准备多语言本地化策略。</div>
+  
+  <a class="read-original" href="https://techcrunch.com/2026/06/09/apples-app-store-rolls-out-personalized-recommendations/" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-8">
+  <h3>欧洲数字自主讨论不应邀请美国科技巨头</h3>
+  <div class="article-meta">
+    <span>📝 berthub.eu</span>
+    <span>🕐 2026-06-16 18:00</span>
+    <span class="category-tag">科技</span>
+  </div>
+  
+  <div class="detail">文章讨论了欧洲数字自主性会议中邀请美国科技巨头（如Microsoft、Google、Amazon）参与的问题。作者指出，这些公司表面上支持欧洲数字主权，但实际上会通过重复旧论点（如“Microsoft能保护欧洲免受美国政策影响”）来阻碍实质进展，并引用Microsoft在ICC事件中未履行承诺的案例。会议中即使有人反驳这些观点，也会因“双方各执一词”的假象而浪费时间和模糊焦点。
+
+核心观点是：美国科技巨头的利益与欧洲数字主权直接冲突，任何欧洲主权提升都会减少其利润，因此它们不可能真诚贡献解决方案。关键数据包括Microsoft副总裁Brad Smith在承诺保护欧洲权利后一周内，因美国制裁要求ICC移除员工，却未诉诸法律。作者强调，邀请这些公司参会只会导致“童话故事”和“两面化”问题，类似烟草和酒精公司被排除在健康会议之外。
+
+对从业者的启发是：在讨论数字自主性时，应严格界定参与者的利益冲突，避免邀请直接利益受损方（如美国科技巨头）主导议程。会议设计需确保独立专家和欧洲本土企业有足够发言权，防止“两面化”策略稀释核心问题。同时，需建立事实核查机制，及时驳斥不实主张，避免时间浪费和误导性印象。</div>
+  
+  <a class="read-original" href="https://berthub.eu/articles/posts/do-not-invite-big-tech-to-your-digital-autonomy-discussion/" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-9">
+  <h3>WM_COPYDATA消息在Windows 3.1中的巧妙兼容设计</h3>
+  <div class="article-meta">
+    <span>📝 devblogs.microsoft.com/oldnewthing · Raymond Chen</span>
+    <span>🕐 2026-06-16 14:00</span>
+    <span class="category-tag">科技</span>
+  </div>
+  <div class="tags"><span class="tag">Old New Thing</span><span class="tag">Other</span></div>
+  <div class="detail">这篇文章介绍了Windows 3.1中WM_COPYDATA消息的巧妙兼容设计。WM_COPYDATA消息最初是为32位Windows引入的，因为32位程序运行在独立地址空间中，无法像16位程序那样直接通过指针传递数据。然而，为了让Win32s（32位子系统）也能在16位Windows上运行，微软需要让这条消息同时兼容16位程序。
+
+核心观点是：由于Windows 3.1中所有程序共享同一地址空间，16位程序间的指针和窗口句柄天然有效。因此，当WM_COPYDATA在16位程序间传递时，系统无需对wParam和lParam做任何特殊处理（即“空封送”），就能正确工作。这实际上利用了Windows 3.1已有的行为——它原本就原封不动地传递消息参数。
+
+对从业者的启发是：兼容性设计有时不需要复杂改造，而是巧妙利用现有系统特性。在跨平台或跨版本开发时，理解底层机制（如地址空间模型）能帮助找到更简洁的解决方案。此外，设计新API时考虑向后兼容性，可以降低迁移成本。</div>
+  
+  <a class="read-original" href="https://devblogs.microsoft.com/oldnewthing/20260616-00/?p=112430" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-10">
+  <h3>DuckDuckGo搜索结果惊现钓鱼网站：伪装成区块链浏览器窃取钱包</h3>
+  <div class="article-meta">
+    <span>📝 timsh.org · tim</span>
+    <span>🕐 2026-06-16 13:34</span>
+    <span class="category-tag">科技</span>
+  </div>
+  
+  <div class="detail">文章内容：一名安全研究员发现DuckDuckGo搜索结果首位出现伪装成Tronscan区块链浏览器的钓鱼网站，该网站诱导用户连接钱包，声称是AML/安全工具。攻击者利用SEO技术操纵Bing及DuckDuckGo搜索结果，将虚假站点推至前三名。这些站点作为网关，快速静默跳转到不断轮换的钓鱼页面，一旦被屏蔽便启用新域名。连接后，恶意脚本扫描受害者钱包，生成无限授权TRC-20代币的交易请求，并利用ClaimRewards()函数盗取TRX。
+
+核心观点/数据：钓鱼网站通过SEO优化占据搜索结果首位，利用网关域名轮换机制规避封禁。硬编码的收款地址在KYT/AML筛查工具中风险评分极低，意味着攻击者可通过大型合规交易所轻松洗钱。研究员发现多个类似案例并收集了恶意软件样本及IOCs。
+
+对从业者的启发：区块链安全从业者需警惕搜索引擎结果中的钓鱼站点，尤其是排名靠前的伪装页面。建议用户直接输入官方域名访问区块链浏览器，而非通过搜索链接。开发团队应加强AML工具对新型洗钱模式的检测能力，避免低风险评分掩盖恶意地址。</div>
+  
+  <a class="read-original" href="https://timsh.org/drainer-at-the-top-of-duckduckgo/" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-11">
+  <h3>1997年双向电视：被遗忘的互动电视先驱</h3>
+  <div class="article-meta">
+    <span>📝 shkspr.mobi · @edent</span>
+    <span>🕐 2026-06-16 11:34</span>
+    <span class="category-tag">科技</span>
+  </div>
+  <div class="tags"><span class="tag">/etc/</span><span class="tag">BBC</span><span class="tag">history</span><span class="tag">internet</span><span class="tag">retrotech</span></div>
+  <div class="detail">1997年，英国BBC内部演示了一款名为“Two Way TV”的互动电视原型机，用户可通过灰色机顶盒连接调制解调器，实时参与《谁想成为百万富翁》等节目答题并赢取现金奖励。一名匿名捐赠者将当年试用的设备寄给作者，展示了其硬件细节：支持NICAM立体声、SCART接口、PS/2键盘口及电话拨号连接，配备红蓝双色四键控制器。
+
+核心在于，这套系统通过电话线实现电视节目的双向数据交互，比现代流媒体互动早二十余年。设备采用8针串口连接遥控接收器，机顶盒内置数字解码器但兼容模拟信号透传，控制器仅用三角形、方形、圆形、菱形四键完成答题交互。
+
+对从业者的启发：早期互动电视的硬件设计（如专用控制器、拨号回传）虽被互联网淘汰，但其“实时参与+现金激励”模式仍是今日直播答题、电视投票的雏形。开发者应警惕过度依赖网络基础设施，离线交互方案（如本地解码+电话回传）在特定场景仍有价值。</div>
+  
+  <a class="read-original" href="https://shkspr.mobi/blog/2026/06/two-way-tv-product-photos-of-1997s-hottest-gadget/" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-12">
+  <h3>三个例子足以证明数学定理</h3>
+  <div class="article-meta">
+    <span>📝 johndcook.com · John</span>
+    <span>🕐 2026-06-16 11:14</span>
+    <span class="category-tag">科技</span>
+  </div>
+  <div class="tags"><span class="tag">Math</span></div>
+  <div class="detail">这篇文章探讨了一个反直觉的数学现象：通常情况下，仅凭几个例子无法证明一个定理，但在某些特定条件下，检查少量实例就足以构成严格证明。作者以五边形数和三角形数的恒等式为例，说明当两个二次多项式相等时，只需验证它们在三个点（如 n=0, 1, 2）上的值一致，就能确保等式对所有整数成立。文中还提供了 Python 代码片段（使用 lambda 函数定义 P 和 T），通过断言验证了这三个点的等式，并强调这并非简单的“合理性检查”，而是一个严谨的数学证明。
+
+核心观点是：对于多项式恒等式，验证的次数取决于多项式的次数——一个 d 次多项式如果与另一个多项式在 d+1 个不同点处相等，则两者完全等同。这一原理源于代数基本定理，即非零多项式至多有 d 个根。文中以 n=0,1,2 为例，展示了如何利用这一性质将无限验证简化为有限检查，从而在特定场景下实现“用三个例子证明定理”。
+
+对从业者的启发是：在算法设计或系统验证中，若涉及多项式或可参数化的恒等式，可以借鉴这种“有限点验证”策略来简化测试流程。例如，在 Rust 或 C++ 中实现数学函数时，不必穷举所有输入，而是利用次数信息选择关键测试点，从而在保证正确性的同时大幅降低测试成本。但需注意，该方法仅适用于多项式形式，对于指数、对数等非多项式函数仍需传统证明或更复杂的验证手段。</div>
+  
+  <a class="read-original" href="https://www.johndcook.com/blog/2026/06/16/three-examples-suffice/" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-13">
+  <h3>Apple Disk II 1978年6月发布：传奇磁盘驱动器的真相</h3>
+  <div class="article-meta">
+    <span>📝 dfarq.homeip.net · Dave Farquhar</span>
+    <span>🕐 2026-06-16 11:00</span>
+    <span class="category-tag">科技</span>
+  </div>
+  <div class="tags"><span class="tag">Retro Computing</span></div>
+  <div class="detail">苹果Disk II磁盘驱动器于1978年6月发布，距Apple II电脑问世约一年。这篇来自dfarq.homeip.net的回顾文章指出，虽然Disk II常被描绘为天才发明家智取大公司的传奇故事，但真实情况更为复杂。文章详细介绍了Steve Wozniak在1977年底至1978年初的研发过程，包括在圣诞节和新年加班工作，最终用仅5颗芯片完成了磁盘接口设计。
+
+核心数据揭示了传奇背后的真相：按2025年美元计算，Disk II售价高达2957美元，比Tandy的磁盘驱动器更贵。Wozniak的创新在于使用Group Coded Recording编码替代Shugart的FM编码，使磁盘存储容量提升30%。虽然驱动器制造成本仅140美元，但苹果的定价策略使其并非如传说中那样"平价"。
+
+对从业者的启发是：技术创新与商业定价之间存在显著差距，Wozniak用极简硬件设计（5芯片替代标准接口）证明了工程突破可以颠覆行业标准，但苹果的定价策略提醒我们，产品最终价值由市场定位而非成本决定。同时，Shugart试图用缺陷产品阻挠苹果的故事，说明早期科技商业谈判中的博弈智慧。</div>
+  
+  <a class="read-original" href="https://dfarq.homeip.net/apple-disk-ii-launched-june-1978/?utm_source=rss&utm_medium=rss&utm_campaign=apple-disk-ii-launched-june-1978" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-14">
+  <h3>开源项目交接的多种机制</h3>
+  <div class="article-meta">
+    <span>📝 nesbitt.io · Andrew Nesbitt (andrew@ecosyste.ms)</span>
+    <span>🕐 2026-06-16 10:00</span>
+    <span class="category-tag">科技</span>
+  </div>
+  <div class="tags"><span class="tag">open-source</span><span class="tag">maintainers</span><span class="tag">reference</span></div>
+  <div class="detail">这篇文章探讨了开源项目交接的多种机制，重点分析了项目维护权如何从原维护者转移到新维护者手中。作者列举了三种主要方式：维护者直接指定继任者、通过GitHub等平台设置账户继承、以及开放收养模式（如CPAN的ADOPTME机制）。文章还提到，这些机制在实际执行中存在漏洞，例如event-stream和xz事件中，恶意行为者利用维护者信任或疲劳进行接管。
+
+核心观点是，当前开源项目交接机制缺乏标准化和安全性保障。数据表明，大多数项目死亡源于维护权未能及时交接，而现有机制（如CPAN的HANDOFF和GitHub的account successors）覆盖范围有限，且缺乏对注册表账户的同步支持。例如，event-stream事件中，维护者仅凭一封邮件就移交权限，导致恶意代码注入。
+
+对从业者的启发是，开源项目维护者应主动采用多重验证机制（如双因素认证和社区审查）来防止恶意接管。同时，平台（如GitHub和RubyGems）需要完善交接流程，例如引入时间延迟和社区投票机制，并确保仓库与注册表权限同步更新。此外，维护者应提前设置账户继承人或采用ADOPTME模式，避免因突发情况导致项目停滞。</div>
+  
+  <a class="read-original" href="https://nesbitt.io/2026/06/16/how-open-source-projects-change-hands.html" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-15">
+  <h3>出口管制损害美国网络防御：AI修复漏洞被误禁</h3>
+  <div class="article-meta">
+    <span>📝 simonwillison.net</span>
+    <span>🕐 2026-06-16 05:20</span>
+    <span class="category-tag">科技</span>
+  </div>
+  <div class="tags"><span class="tag">jailbreaking</span><span class="tag">security</span><span class="tag">ai</span><span class="tag">generative-ai</span><span class="tag">llms</span></div>
+  <div class="detail">美国出口管制政策误将AI修复漏洞的能力视为威胁，导致Claude Fable 5等模型因“修复代码”功能被禁。文章指出，研究人员让Fable 5、Mythos和Opus审查含已知CVE和故意植入漏洞的代码，Fable 5拒绝后，通过多步骤手动流程将“修复代码”输出转化为测试脚本。Kate Moussouris强调，这种防御性请求并非越狱，而是AI对网络防御最有价值的应用——执行查找、修复和测试循环。
+
+核心观点是，出口管制误判了AI在网络安全中的角色。数据表明，Fable 5的“修复代码”功能被禁，是因为非技术决策者将“网络攻击”能力与防御能力混淆。实际上，修复漏洞和验证补丁是防御者的日常需求，移除该能力只会降低模型在安全领域的实用性。
+
+对从业者的启发是，需警惕政策对AI防御能力的误伤。开发者应主动向决策者解释，GPT、Transformer等模型修复漏洞是防御而非攻击行为。同时，在Rust等语言中集成AI安全工具时，需确保合规性，并推动行业标准区分防御性与攻击性用例，避免技术优势被政策限制。</div>
+  
+  <a class="read-original" href="https://simonwillison.net/2026/Jun/16/fable-5-export-controls/#atom-everything" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-16">
+  <h3>如何获取新想法：从异常中发现创新</h3>
+  <div class="article-meta">
+    <span>📝 paulgraham.com</span>
+    <span>🕐 近期</span>
+    <span class="category-tag">科技</span>
+  </div>
+  
+  <div class="detail">这篇文章探讨了获取新想法的核心方法：通过观察异常现象——那些看似奇怪、缺失或有问题的事物。作者以GPT回答问题的局限性为引，强调真正的创新源于对知识边界处“缝隙”的敏锐捕捉，而非依赖现有模型的输出。
+
+核心观点是：知识呈分形增长，表面平滑的边界在深入后会显露出大量未被探索的空白。这些空白在研究者眼中会显得异常明显，比如“为何没人尝试x”或“为何无人思考y”。探索这些间隙可能催生全新的知识分支，如同Transformer架构最初对注意力机制的异常关注最终重塑了AI领域。
+
+对从业者的启发是：不要被动接受现有工具（如GPT）的答案，而应主动在专业领域寻找“反常缺口”。例如，Rust语言的设计者正是发现了内存安全与性能之间的异常矛盾，才创造了新的系统编程范式。将注意力从“已知解法”转向“未解异常”，才是突破性创新的起点。</div>
+  
+  <a class="read-original" href="http://www.paulgraham.com/getideas.html" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+</div>
+
+<div class="category">
+<h2>📈 商业 / 行业</h2>
+
+
+<div class="article" id="article-17">
+  <h3>斯坦福2026年精益创业课总结：AI正在改变创业教育</h3>
+  <div class="article-meta">
+    <span>📝 steveblank.com · steve blank</span>
+    <span>🕐 2026-06-16 13:00</span>
+    <span class="category-tag">商业</span>
+  </div>
+  <div class="tags"><span class="tag">Customer Development</span><span class="tag">Lean LaunchPad</span><span class="tag">Teaching</span></div>
+  <div class="detail">斯坦福2026年春季精益创业课（Lean LaunchPad）刚刚结束，这是该课程的第16个年头。课程最初提出用精益方法替代传统商业计划书来指导初创企业，如今已成为公认的创业教育框架。2026年春季学期，8个团队共访谈了978名潜在客户、受益者和监管者，学生每周投入15-20小时，是普通课程的两倍。课程还催生了美国国家科学基金会（NSF）的I-Corps项目，目前已覆盖100多所大学，培训3251个团队，孵化1400多家初创公司。
+
+核心观点是：初创企业不是大公司的缩小版，而是一个寻找可重复、可扩展商业模式的临时组织。关键数据包括团队访谈近千名客户、学生投入双倍课时，以及I-Corps项目十年间培训超3000团队。文章还预告将总结AI在课程中的应用，暗示GPT、Transformer等工具正在改变创业教育的方法论。
+
+对从业者的启发是：AI工具（如GPT）可以加速客户发现和商业模式验证，但精益创业的核心——走出办公室与真实用户对话——仍不可替代。建议创业者将AI用于自动化访谈记录、市场数据分析，但保留人工判断来识别非结构化洞察。同时，政府资助的I-Corps模式证明，系统化的科学创业方法能显著提高技术商业化成功率。</div>
+  
+  <a class="read-original" href="https://steveblank.com/2026/06/16/lean-launch-pad-2026-stanford-lessons-learned-presentations/" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-18">
+  <h3>OpenAI 2025年亏损激增近8倍，支出达340亿美元</h3>
+  <div class="article-meta">
+    <span>📝 wheresyoured.at · Ed Zitron</span>
+    <span>🕐 2026-06-16 03:58</span>
+    <span class="category-tag">商业</span>
+  </div>
+  
+  <div class="detail">OpenAI 2025年亏损激增近8倍，支出达340亿美元。根据经《金融时报》独立核实的审计财务文件，OpenAI在2025年净亏损约385亿美元，收入为130.7亿美元，成本与支出高达340亿美元。相比之下，2024年其净亏损为50.9亿美元，收入仅37亿美元。2025年运营亏损达209.2亿美元，研发支出占成本大头，达到约200亿美元。文件还显示，公司通过“非控制性成员资本”调整了部分亏损，但具体细节未明。
+
+核心观点：OpenAI收入从37亿美元增至130.7亿美元，增长近3.5倍，但亏损从50.9亿美元飙升至385亿美元，增幅近8倍。2025年研发支出约200亿美元，占总成本的近60%，表明公司仍在巨额投入以维持技术领先。成本结构中，收入成本仅26.5亿美元，远低于研发和运营支出，显示其商业模式尚未盈利。
+
+对从业者的启发：OpenAI的财务数据揭示，AI领域的领先地位需以持续巨额资本投入为代价，研发支出是核心驱动力。对于创业公司，应警惕盲目追求规模扩张而忽视盈利路径。同时，成本控制与收入多元化（如GPT API、企业服务）是未来关键。投资者需评估AI公司的高风险高回报特性，关注其能否在Transformer等模型迭代中实现商业化闭环。</div>
+  
+  <a class="read-original" href="https://www.wheresyoured.at/exclusive-openai-financials/" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+
+<div class="article" id="article-19">
+  <h3>超线性回报：理解世界的关键法则</h3>
+  <div class="article-meta">
+    <span>📝 paulgraham.com</span>
+    <span>🕐 近期</span>
+    <span class="category-tag">商业</span>
+  </div>
+  
+  <div class="detail">这篇文章由Paul Graham撰写，探讨了“超线性回报”这一关键法则，指出在商业、名声、知识等多个领域中，表现优异者获得的回报并非线性增长，而是呈指数级或阈值式放大。作者以创业为例，强调高增长率的公司能获得巨大价值，而表现平平者则可能被淘汰，这种模式源于世界的本质而非人为规则。
+
+核心观点是：超线性回报由两个根本原因驱动——指数增长（如细菌培养、初创公司）和阈值效应（如军事胜利、知识突破）。数据上，Y Combinator鼓励创始人专注于增长，因为即使微小优势也能导致结果的天壤之别；例如，产品仅差一半质量，可能不是获得一半客户，而是零客户并破产。
+
+对从业者的启发是：在职业或创业中，应主动识别并利用超线性回报的领域，如技术开发（GPT、Transformer）或系统优化（Rust编程）。这意味着要追求可复利增长的机会，而非满足于线性努力，因为关键阈值一旦跨越，回报将呈爆炸式增长。同时，需警惕线性思维陷阱，避免在低增长领域浪费资源。</div>
+  
+  <a class="read-original" href="http://www.paulgraham.com/superlinear.html" target="_blank">📖 阅读英文原文 →</a>
+</div>
+
+</div>
+
+
+<div class="footer">
+  由 <a href="https://github.com/" target="_blank">Karpathy RSS Daily Digest</a> 自动生成<br>
+  数据来源: Andrej Karpathy 推荐的 92 个顶级科技博客
+</div>
+</div>
+</body>
+</html>

@@ -1,14 +1,12 @@
 name: RSS Digest
 
 on:
-  # 每天北京时间 22:00（UTC 14:00）运行
   schedule:
     - cron: '0 14 * * *'
-  # 手动触发
   workflow_dispatch:
 
 permissions:
-  contents: write  # 允许推送代码到仓库
+  contents: write
 
 jobs:
   fetch-and-push:
@@ -28,12 +26,31 @@ jobs:
           pip install feedparser httpx beautifulsoup4 python-dateutil jinja2 openai
       
       - name: Run RSS reader
+        id: rss
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           WECOM_WEBHOOK_URL: ${{ secrets.WECOM_WEBHOOK_URL }}
           ENABLE_CONTENT_FILTER: 'true'
         run: |
           python rss_reader.py --webhook "$WECOM_WEBHOOK_URL" --days 1
+      
+      - name: Push to Server酱
+        env:
+          SCT_KEY: ${{ secrets.SCT_KEY }}
+        run: |
+          LATEST=$(ls -t docs/*.html 2>/dev/null | head -1)
+          if [ -z "$LATEST" ]; then echo "No HTML found"; exit 0; fi
+          TITLE="Karpathy RSS Digest $(date '+%Y-%m-%d')"
+          DESP=$(python3 -c "
+import sys, re, json
+content = open('$LATEST').read()
+articles = re.findall(r'<h[23]>(.*?)</h[23]>', content)
+summary = chr(10).join([f'{i+1}. {a}' for i,a in enumerate(articles[:20])])
+print(json.dumps({'title': '$TITLE', 'desp': summary[:30000]}))
+")
+          curl -s -X POST "https://sctapi.ftqq.com/${SCT_KEY}.send" \
+            -H "Content-Type: application/json" \
+            -d "$DESP"
       
       - name: Commit and push changes
         run: |

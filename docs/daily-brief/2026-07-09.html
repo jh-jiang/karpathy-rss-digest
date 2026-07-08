@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>每日简报 · 2026-07-09</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --bg-elevated: #ffffff;
+    --fg: #18181b;
+    --fg-soft: #3f3f46;
+    --muted: #71717a;
+    --rule: #e4e4e7;
+    --card: #f4f4f5;
+    --link: #1d4ed8;
+    --accent: #18181b;
+    --accent-fg: #fafaf9;
+    --rank-high-bg: #fee2e2;
+    --rank-high-fg: #991b1b;
+    --rank-mid-bg: #fef3c7;
+    --rank-mid-fg: #92400e;
+    --rank-low-bg: #e0e7ff;
+    --rank-low-fg: #3730a3;
+    --hero-grad-from: #fafaf9;
+    --hero-grad-to: #f4f4f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0a;
+      --bg-elevated: #18181b;
+      --fg: #fafafa;
+      --fg-soft: #d4d4d8;
+      --muted: #a1a1aa;
+      --rule: #27272a;
+      --card: #18181b;
+      --link: #93c5fd;
+      --accent: #fafafa;
+      --accent-fg: #0a0a0a;
+      --rank-high-bg: rgba(239,68,68,0.18);
+      --rank-high-fg: #fca5a5;
+      --rank-mid-bg: rgba(245,158,11,0.18);
+      --rank-mid-fg: #fcd34d;
+      --rank-low-bg: rgba(99,102,241,0.18);
+      --rank-low-fg: #a5b4fc;
+      --hero-grad-from: #18181b;
+      --hero-grad-to: #0a0a0a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  /* ===== header ===== */
+  header.report-header { margin-bottom: 1.25rem; }
+  .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  h1.report-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0.4rem 0 1.2rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .archive-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 1px;
+  }
+  .archive-link:hover { color: var(--accent); border-bottom-style: solid; }
+  .hero-card {
+    background: linear-gradient(135deg, var(--hero-grad-from) 0%, var(--hero-grad-to) 100%);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.4rem;
+    border-radius: 0.6rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .hero-headline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0.35rem 0 0;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+  .overview-card {
+    margin: 0.7rem 0 0;
+    padding: 0.7rem 1.1rem;
+    background: var(--card);
+    border-radius: 0.5rem;
+    border-left: 3px solid var(--muted);
+  }
+  .overview-card .eyebrow { display: block; margin-bottom: 0.3rem; }
+  .overview-text {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--fg-soft);
+  }
+
+  /* ===== primary tabs ===== */
+  .tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin: 1.25rem 0 0.75rem;
+    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: none;
+    border: none;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: inherit;
+    transition: color 0.15s;
+  }
+  .tab:hover { color: var(--fg); }
+  .tab.active {
+    color: var(--fg);
+    border-bottom-color: var(--accent);
+  }
+  .tab .count {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-left: 0.4rem;
+    font-weight: 400;
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ===== digest (AI 简报) — compact ===== */
+  .digest-category { margin-bottom: 1.1rem; }
+  .category-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    margin: 0 0 0.55rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .category-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--fg);
+    margin: 0;
+    letter-spacing: 0.05em;
+  }
+  .category-count {
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--card);
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+  }
+  .brief-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  @media (min-width: 720px) {
+    .brief-list { grid-template-columns: 1fr 1fr; }
+  }
+  .brief {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.95rem;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .brief:hover {
+    border-color: var(--muted);
+    transform: translateY(-1px);
+  }
+  .brief-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-bottom: 0.3rem;
+  }
+  .brief-source {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .brief-rank {
+    font-size: 0.7rem;
+    padding: 0.12rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .brief-rank.high { background: var(--rank-high-bg); color: var(--rank-high-fg); }
+  .brief-rank.mid  { background: var(--rank-mid-bg);  color: var(--rank-mid-fg); }
+  .brief-rank.low  { background: var(--rank-low-bg);  color: var(--rank-low-fg); }
+  .brief-title {
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem;
+    line-height: 1.35;
+  }
+  .brief-title a { color: var(--fg); text-decoration: none; }
+  .brief-title a:hover { color: var(--link); text-decoration: underline; }
+  .brief-summary {
+    margin: 0;
+    color: var(--fg-soft);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .editor-card {
+    background: var(--card);
+    border-left: 3px solid var(--muted);
+    border-radius: 0.5rem;
+    padding: 1rem 1.3rem;
+    margin: 1.5rem 0 1.2rem;
+  }
+  .editor-card .eyebrow { display: block; margin-bottom: 0.4rem; }
+  .editor-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--fg);
+  }
+  .keywords { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; }
+  .keyword {
+    background: var(--card);
+    color: var(--fg-soft);
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+  }
+
+  /* ===== L2 sub-tabs ===== */
+  .sub-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1rem 0;
+  }
+  .sub-tab {
+    background: var(--card);
+    border: 1px solid transparent;
+    padding: 0.5rem 1.05rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--fg-soft);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .sub-tab:hover { border-color: var(--muted); color: var(--fg); }
+  .sub-tab.active {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  .sub-tab .count {
+    font-size: 0.7rem;
+    opacity: 0.75;
+    margin-left: 0.4rem;
+    font-weight: 400;
+  }
+  .sub-content { display: none; }
+  .sub-content.active { display: block; }
+
+  /* ===== L3 source-tabs ===== */
+  .source-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.9rem 0 1.3rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .source-tab {
+    background: none;
+    border: 1px solid var(--rule);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.83rem;
+    color: var(--fg-soft);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .source-tab:hover { border-color: var(--muted); color: var(--fg); }
+  .source-tab.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+  .source-tab .count {
+    font-size: 0.7rem;
+    opacity: 0.75;
+    margin-left: 0.3rem;
+  }
+  .source-content { display: none; }
+  .source-content.active { display: block; }
+
+  /* ===== article cards in raw panels ===== */
+  .article {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .article:first-child { padding-top: 0; }
+  .article:last-child { border-bottom: none; }
+  .article-title {
+    font-size: 1rem;
+    margin: 0 0 0.3rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .article-title a { color: var(--fg); text-decoration: none; }
+  .article-title a:hover { color: var(--link); text-decoration: underline; }
+  .article-meta { color: var(--muted); font-size: 0.76rem; margin: 0 0 0.35rem; }
+  .article-stats {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin: 0 0 0.4rem;
+    font-feature-settings: "tnum";
+  }
+  .article-excerpt {
+    margin: 0;
+    color: var(--fg-soft);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .article-summary {
+    margin: 0.55rem 0 0;
+    padding: 0.6rem 0.85rem;
+    background: var(--card);
+    border-left: 2px solid var(--link);
+    border-radius: 0.3rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--fg);
+  }
+  .summary-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    color: var(--link);
+    margin-right: 0.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+  }
+
+  /* ===== trading panel ===== */
+  .crypto-widgets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.55rem;
+    margin: 0.4rem 0 1.2rem;
+  }
+  @media (min-width: 720px) {
+    .crypto-widgets { grid-template-columns: repeat(4, 1fr); }
+  }
+  .crypto-widget {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.85rem;
+    text-align: center;
+  }
+  .widget-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+  .widget-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg);
+    line-height: 1.1;
+  }
+  .widget-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+  .widget-sub.positive { color: #16a34a; }
+  .widget-sub.negative { color: #dc2626; }
+  @media (prefers-color-scheme: dark) {
+    .widget-sub.positive { color: #4ade80; }
+    .widget-sub.negative { color: #fca5a5; }
+  }
+  .crypto-widget.fg-fear-extreme { border-left: 4px solid #b91c1c; }
+  .crypto-widget.fg-fear-extreme .widget-value { color: #b91c1c; }
+  .crypto-widget.fg-fear { border-left: 4px solid #d97706; }
+  .crypto-widget.fg-fear .widget-value { color: #d97706; }
+  .crypto-widget.fg-neutral { border-left: 4px solid var(--muted); }
+  .crypto-widget.fg-greed { border-left: 4px solid #65a30d; }
+  .crypto-widget.fg-greed .widget-value { color: #65a30d; }
+  .crypto-widget.fg-greed-extreme { border-left: 4px solid #16a34a; }
+  .crypto-widget.fg-greed-extreme .widget-value { color: #16a34a; }
+  @media (prefers-color-scheme: dark) {
+    .crypto-widget.fg-fear-extreme .widget-value,
+    .crypto-widget.fg-fear .widget-value { color: #fca5a5; }
+    .crypto-widget.fg-greed .widget-value,
+    .crypto-widget.fg-greed-extreme .widget-value { color: #4ade80; }
+  }
+
+  .trading-overview-card {
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.3rem;
+    background: var(--card);
+    border-radius: 0.5rem;
+    border-left: 3px solid var(--accent);
+  }
+  .trading-overview-card .eyebrow { display: block; margin-bottom: 0.4rem; }
+  .trading-overview-text { font-size: 0.92rem; line-height: 1.75; color: var(--fg-soft); margin: 0; }
+
+  .trading-section-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--fg);
+    letter-spacing: 0.05em;
+  }
+
+  /* picks (Sonnet's watchlist) */
+  .trading-picks {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  @media (min-width: 720px) {
+    .trading-picks { grid-template-columns: 1fr 1fr; }
+  }
+  .trading-pick {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--muted);
+    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
+  }
+  .trading-pick.stance-bull { border-left-color: #16a34a; }
+  .trading-pick.stance-bear { border-left-color: #dc2626; }
+  .trading-pick.stance-neutral { border-left-color: var(--muted); }
+  .pick-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-bottom: 0.45rem;
+  }
+  .pick-symbol-block {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .pick-symbol { font-weight: 700; font-size: 1rem; color: var(--fg); }
+  .pick-name { color: var(--muted); font-size: 0.82rem; }
+  .pick-stance {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pick-stance-bull { background: rgba(22,163,74,0.12); color: #16a34a; }
+  .pick-stance-bear { background: rgba(220,38,38,0.12); color: #dc2626; }
+  .pick-stance-neutral { background: var(--card); color: var(--muted); }
+  .pick-rationale { margin: 0; font-size: 0.88rem; line-height: 1.65; color: var(--fg-soft); }
+
+  /* asset-group tabs */
+  .trading-group-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.6rem 0 1.2rem;
+  }
+  .trading-group-tab {
+    background: var(--card);
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--fg-soft);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .trading-group-tab:hover { border-color: var(--muted); color: var(--fg); }
+  .trading-group-tab.active {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  .trading-group-tab .count {
+    font-size: 0.7rem;
+    opacity: 0.75;
+    margin-left: 0.4rem;
+    font-weight: 400;
+  }
+  .trading-group-content { display: none; }
+  .trading-group-content.active { display: block; }
+
+  /* ticker cards */
+  .ticker-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    border-radius: 0.55rem;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.7rem;
+  }
+  .ticker-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.65rem;
+  }
+  .ticker-id { min-width: 0; }
+  .ticker-symbol { margin: 0; font-size: 1rem; font-weight: 700; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
+  .ticker-name { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--muted); }
+  .ticker-price-block { text-align: right; flex-shrink: 0; }
+  .ticker-price { display: block; font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .ticker-pct { display: inline-block; font-size: 0.82rem; font-weight: 500; margin-top: 0.15rem; font-variant-numeric: tabular-nums; }
+  .ticker-pct.positive, .positive { color: #16a34a; }
+  .ticker-pct.negative, .negative { color: #dc2626; }
+
+  .ticker-indicators {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.35rem 0.9rem;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--fg-soft);
+  }
+  @media (min-width: 720px) {
+    .ticker-indicators { grid-template-columns: repeat(3, 1fr); }
+  }
+  .ticker-indicators > div { display: flex; gap: 0.4rem; align-items: baseline; min-width: 0; }
+  .ticker-indicators dt { color: var(--muted); font-size: 0.74rem; margin: 0; white-space: nowrap; }
+  .ticker-indicators dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 500; color: var(--fg); }
+  .trend-bullish { color: #16a34a; }
+  .trend-bearish { color: #dc2626; }
+  .trend-neutral { color: var(--muted); }
+  .rsi-overbought { color: #d97706; }
+  .rsi-oversold { color: #2563eb; }
+
+  .ticker-signals {
+    margin-top: 0.65rem;
+    padding-top: 0.55rem;
+    border-top: 1px dashed var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .signal-pill {
+    font-size: 0.72rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .signal-pill.tone-bull { background: rgba(22,163,74,0.13); color: #166534; }
+  .signal-pill.tone-bear { background: rgba(220,38,38,0.13); color: #991b1b; }
+  .signal-pill.tone-caution { background: rgba(217,119,6,0.15); color: #92400e; }
+  @media (prefers-color-scheme: dark) {
+    .signal-pill.tone-bull { color: #4ade80; }
+    .signal-pill.tone-bear { color: #fca5a5; }
+    .signal-pill.tone-caution { color: #fcd34d; }
+    .trend-bullish, .positive, .ticker-pct.positive { color: #4ade80; }
+    .trend-bearish, .negative, .ticker-pct.negative { color: #fca5a5; }
+    .rsi-overbought { color: #fcd34d; }
+    .rsi-oversold { color: #93c5fd; }
+    .trading-pick.stance-bull { border-left-color: #4ade80; }
+    .trading-pick.stance-bear { border-left-color: #fca5a5; }
+    .pick-stance-bull { background: rgba(74,222,128,0.15); color: #4ade80; }
+    .pick-stance-bear { background: rgba(252,165,165,0.15); color: #fca5a5; }
+  }
+  .signal-age { opacity: 0.7; font-weight: 400; }
+
+  .trading-risk {
+    margin: 1.5rem 0 0;
+    padding: 0.9rem 1.2rem;
+    background: var(--card);
+    border-radius: 0.45rem;
+    border-left: 3px solid #d97706;
+  }
+  .trading-risk .eyebrow { display: block; margin-bottom: 0.35rem; }
+  .trading-risk p { margin: 0; font-size: 0.82rem; line-height: 1.65; color: var(--fg-soft); }
+
+  footer {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.1rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="report-header">
+    <span class="eyebrow">每日简报</span>
+    <h1 class="report-title">2026-07-09</h1>
+    
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="tech">技术动态<span class="count">45</span></button>
+    <button class="tab" data-tab="trading">市场行情<span class="count">21</span></button>
+    <button class="tab" data-tab="politics">时政观察<span class="count">9</span></button>
+    <button class="tab" data-tab="finance">财经要点<span class="count">12</span></button>
+    <button class="tab" data-tab="community">社区讨论<span class="count">10</span></button>
+  </nav>
+
+  <section class="panel active" data-panel="tech">
+    <nav class="sub-tabs"><button class="sub-tab active" data-sub="github-trending" data-cat="tech">GitHub Trending<span class="count">15</span></button><button class="sub-tab" data-sub="x-viral" data-cat="tech">X 推文<span class="count">15</span></button><button class="sub-tab" data-sub="ai-news" data-cat="tech">AI 媒体<span class="count">15</span></button></nav>
+<div class="sub-contents"><div class="sub-content active" data-sub-content="github-trending" data-cat="tech">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="github-trending" data-sub="github-trending" data-cat="tech">
+    <article class="article">
+  <h3 class="article-title"><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener noreferrer">addyosmani/agent-skills</a></h3>
+  <p class="article-stats">JavaScript · ★ 73,959 · 🍴 7,978 · 📈 1,322 stars today</p>
+  
+  <p class="article-excerpt">Production-grade engineering skills for AI coding agents.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 为AI编码代理提供生产级工程技能的知识库或工具集，涵盖最佳实践与模块化能力，帮助开发者构建更可靠的自主编程Agent。适用于需要提升AI代码生成质量和工程规范性的场景。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/ruvnet/RuView" target="_blank" rel="noopener noreferrer">ruvnet/RuView</a></h3>
+  <p class="article-stats">Rust · ★ 79,113 · 🍴 10,647 · 📈 793 stars today</p>
+  
+  <p class="article-excerpt">π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 利用商用WiFi信号实现实时空间感知、生命体征监测和存在检测，无需摄像头。通过分析无线信号反射变化，适用于智能家居、医疗监护等非接触式感知场景，保护隐私且成本低廉。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" rel="noopener noreferrer">TencentCloud/TencentDB-Agent-Memory</a></h3>
+  <p class="article-stats">TypeScript · ★ 7,610 · 🍴 705 · 📈 351 stars today</p>
+  
+  <p class="article-excerpt">TencentDB Agent Memory delivers fully local long-term memory for AI Agents via a 4-tier progressive pipeline, with zero external API dependencies.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 为AI Agent提供完全本地的长期记忆能力，采用四级渐进式流水线架构，无需外部API依赖。适合需要持久化对话上下文或知识管理的Agent应用，保障数据隐私与低延迟。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/prisma/prisma" target="_blank" rel="noopener noreferrer">prisma/prisma</a></h3>
+  <p class="article-stats">TypeScript · ★ 46,536 · 🍴 2,279 · 📈 30 stars today</p>
+  
+  <p class="article-excerpt">Next-generation ORM for Node.js &amp; TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server, SQLite, MongoDB and CockroachDB</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Node.js和TypeScript的下一代ORM，支持PostgreSQL、MySQL、MariaDB、SQL Server、SQLite、MongoDB和CockroachDB。通过类型安全的查询构建器和自动迁移，简化数据库操作，适用于现代Web和后端开发。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener noreferrer">mvanhorn/last30days-skill</a></h3>
+  <p class="article-stats">Python · ★ 50,721 · 🍴 4,231 · 📈 373 stars today</p>
+  
+  <p class="article-excerpt">AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> AI Agent技能，自动检索Reddit、X、YouTube、HN、Polymarket等平台的最新话题，并综合生成有依据的摘要。适合市场调研、舆情监控、竞品分析等需要跨平台快速获取信息的场景。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/argoproj/argo-cd" target="_blank" rel="noopener noreferrer">argoproj/argo-cd</a></h3>
+  <p class="article-stats">Go · ★ 23,419 · 🍴 7,424 · 📈 20 stars today</p>
+  
+  <p class="article-excerpt">Declarative Continuous Deployment for Kubernetes</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Kubernetes声明的持续部署工具，基于GitOps实现应用自动化同步。通过将部署配置存储在Git仓库中，确保环境一致性并简化回滚，适用于需要可靠CD管道的云原生团队。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/iOfficeAI/OfficeCLI" target="_blank" rel="noopener noreferrer">iOfficeAI/OfficeCLI</a></h3>
+  <p class="article-stats">C# · ★ 11,715 · 🍴 796 · 📈 1,712 stars today</p>
+  
+  <p class="article-excerpt">OfficeCLI is the first and best Office suite purpose-built for AI agents to read, edit, and automate Word, Excel, and PowerPoint files. Free, open-source, single binary, no Office installation required.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 专为AI Agent设计的Office命令行工具，无需安装Office即可读写编辑Word、Excel、PowerPoint文件。单个二进制文件，开源免费，适用于让AI自动生成报告、处理表格等办公自动化场景。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/asgeirtj/system_prompts_leaks" target="_blank" rel="noopener noreferrer">asgeirtj/system_prompts_leaks</a></h3>
+  <p class="article-stats">JavaScript · ★ 54,138 · 🍴 8,815 · 📈 1,226 stars today</p>
+  
+  <p class="article-excerpt">Extracted system prompts from Anthropic - Claude Fable 5, Opus 4.8, Claude Code, Claude Design. OpenAI - ChatGPT 5.5 Thinking, GPT 5.5 Instant, Codex. Google - Gemini 3.5 Flash, 3.1 Pro, Antigravity. xAI - Grok, Cursor, Copilot, VS Code, Perplexity, and more. Updated regularly.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 提取自Anthropic、OpenAI、Google等公司最新大模型的系统提示（system prompt），包括Claude Fable 5、GPT 5.5 Thinking、Gemini 3.5 Flash等。供AI研究者和开发者分析模型指导原则与行为设定。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener noreferrer">obra/superpowers</a></h3>
+  <p class="article-stats">Shell · ★ 249,788 · 🍴 22,161 · 📈 1,170 stars today</p>
+  
+  <p class="article-excerpt">An agentic skills framework &amp; software development methodology that works.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 一套面向AI Agent的技能框架与软件开发方法论，提供可复用的构建模块和组织流程，帮助团队高效创建可靠且可扩展的智能代理应用。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/alibaba/zvec" target="_blank" rel="noopener noreferrer">alibaba/zvec</a></h3>
+  <p class="article-stats">C++ · ★ 14,379 · 🍴 886 · 📈 370 stars today</p>
+  
+  <p class="article-excerpt">A lightweight, lightning-fast, in-process vector database</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 轻量级进程内向量数据库，极速检索，适合嵌入本地应用。无需独立服务部署，支持向量相似性搜索，适用于RAG、推荐系统、语义匹配等需要快速近邻查询的场景。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/Diolinux/PhotoGIMP" target="_blank" rel="noopener noreferrer">Diolinux/PhotoGIMP</a></h3>
+  <p class="article-stats">CSS · ★ 15,010 · 🍴 592 · 📈 916 stars today</p>
+  
+  <p class="article-excerpt">A Patch for GIMP 3+ for Photoshop Users</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 为GIMP 3+开发的补丁，将界面和快捷键调整至接近Photoshop，降低设计师的切换成本。包含预设配置文件，让PS用户能在免费开源的GIMP中保持原有工作流。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/wonderwhy-er/DesktopCommanderMCP" target="_blank" rel="noopener noreferrer">wonderwhy-er/DesktopCommanderMCP</a></h3>
+  <p class="article-stats">TypeScript · ★ 6,368 · 🍴 746 · 📈 20 stars today</p>
+  
+  <p class="article-excerpt">This is MCP server for Claude that gives it terminal control, file system search and diff file editing capabilities</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 为Claude提供终端控制、文件系统搜索和差异编辑能力的MCP服务器。使Claude能像本地工具一样执行命令、修改文件，适用于自动化运维、代码重构等需要操作系统资源的场景。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/huxingyi/autoremesher" target="_blank" rel="noopener noreferrer">huxingyi/autoremesher</a></h3>
+  <p class="article-stats">C++ · ★ 1,984 · 🍴 150 · 📈 292 stars today</p>
+  
+  <p class="article-excerpt">Automatic quad remeshing tool</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 自动四边形网格重新划分工具，将任意三角网格转化为规整的四边形网格。适用于3D建模、游戏开发、渲染优化等领域，提升后续细分和形变动画的稳定性与效率。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/bradautomates/claude-video" target="_blank" rel="noopener noreferrer">bradautomates/claude-video</a></h3>
+  <p class="article-stats">Python · ★ 6,027 · 🍴 717 · 📈 948 stars today</p>
+  
+  <p class="article-excerpt">Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 赋予Claude观看视频的能力，自动下载视频、提取关键帧、转录音频并将完整信息传给Claude进行分析。适用于视频内容总结、审核、教育等需要AI理解动态画面的场景。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://github.com/TencentCloud/CubeSandbox" target="_blank" rel="noopener noreferrer">TencentCloud/CubeSandbox</a></h3>
+  <p class="article-stats">Rust · ★ 8,913 · 🍴 737 · 📈 555 stars today</p>
+  
+  <p class="article-excerpt">Instant, Concurrent, Secure &amp; Lightweight Sandbox for AI Agents.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 专为AI Agent设计的沙箱环境，支持即时启动、并发执行、安全隔离且轻量级。适合在受限环境中安全运行Agent代码，防止恶意操作影响宿主机，保障多Agent协同安全。</p>
+</article>
+  </div>
+    </div>
+  </div>
+<div class="sub-content" data-sub-content="x-viral" data-cat="tech">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="attentionvc-ai" data-sub="x-viral" data-cat="tech">
+    <article class="article">
+  <h3 class="article-title"><a href="https://x.com/EverettRandle/status/2074527860510085498" target="_blank" rel="noopener noreferrer">The Task Economy - Data will be the next $1 Trillion Category </a></h3>
+  <p class="article-stats">@EverettRandle · 19.4K 粉丝 · 484.8K 阅 · 507 赞 · 56 转</p>
+  <p class="article-meta">07/08 00:15</p>
+  <p class="article-excerpt">The Token Economy When we talk about AI today, tokens are king. Specifically, inference tokens have emerged as the primary proxy for tracking the growth of the AI ecosystem. Public companies report</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> EverettRandle 探讨「任务经济」趋势，认为未来数据将成为一个万亿美元级别的新类别，类比 token 在如今 AI 经济中的核心地位。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/pirroh/status/2074118901143679414" target="_blank" rel="noopener noreferrer">Continual Learning for Agents</a></h3>
+  <p class="article-stats">@pirroh · 15.0K 粉丝 · 314.8K 阅 · 540 赞 · 59 转</p>
+  <p class="article-meta">07/06 21:10</p>
+  <p class="article-excerpt">Everyone talks about Continual Learning as if it means one thing only: updating model weights. But there&#39;s an inconvenient truth about the agent ecosystem — the vast majority of agents in production</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> pirroh 指出大多数讨论将连续学习等同于更新模型权重，但实际生产中 agent 生态的连续学习远不止于此，揭示了一个被忽视的关键事实。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/thejessezhang/status/2074154325933424861" target="_blank" rel="noopener noreferrer">Everyone is wrong about open source AI in the enterprise</a></h3>
+  <p class="article-stats">@thejessezhang · 59.4K 粉丝 · 274.2K 阅 · 512 赞 · 54 转</p>
+  <p class="article-meta">07/06 23:31</p>
+  <p class="article-excerpt">The prevailing story right now is that open source is eating the enterprise. The capability gap between the best closed and open models has shrunk to low single digits. A third of the Fortune 500 has</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> thejessezhang 反驳「开源正在吃掉企业市场」的主流叙事，指出虽然开源模型能力差距缩小，但企业实际采纳情况并非如此简单。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/ClaudeDevs/status/2074208949205881033" target="_blank" rel="noopener noreferrer">Getting started with loops </a></h3>
+  <p class="article-stats">@ClaudeDevs · 564.6K 粉丝 · 252.4K 阅 · 2.9K 赞 · 239 转</p>
+  <p class="article-meta">07/07 03:08</p>
+  <p class="article-excerpt">There’s a lot of talk right now about &quot;designing loops&quot; instead of prompting your coding agent. If you spend some time on X trying to pin down what a loop actually is, you&#39;ll come across multiple</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> ClaudeDevs 针对编码 agent 的「设计循环」话题给出入门指南，解释循环究竟是什么，并扫清此前关于该概念的多种混淆说法。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/EXM7777/status/2074501620235465089" target="_blank" rel="noopener noreferrer">This prompt will change your life</a></h3>
+  <p class="article-stats">@EXM7777 · 123.5K 粉丝 · 233.6K 阅 · 554 赞 · 38 转</p>
+  <p class="article-meta">07/07 22:31</p>
+  <p class="article-excerpt">for most people, fable has a few hours left to live... this is the smartest model that ever existed and everyone&#39;s spending its last night building one more app i made it do something 100x more</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> EXM7777 在 Fable 模型即将下架前，用它做了一件比「建又一个 app」有意义 100 倍的事——分享一个能改变人生的 prompt。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/eyad_khrais/status/2074519552277336571" target="_blank" rel="noopener noreferrer">How to become an applied AI engineer</a></h3>
+  <p class="article-stats">@eyad_khrais · 20.2K 粉丝 · 225.8K 阅 · 508 赞 · 38 转</p>
+  <p class="article-meta">07/07 23:42</p>
+  <p class="article-excerpt">I wrote this as the guide I would have wanted before making the transition into Applied AI Engineering. The role broadly overlaps with traditional software engineering, but it adds a few important</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> eyad_khrais 撰写转型应用 AI 工程师的完整指南，涵盖与传统软件工程的重叠与差异，提供自己当初希望看到的路线图。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/michaeljburry/status/2074650549375365613" target="_blank" rel="noopener noreferrer">The Heretic’s Guide to AI’s Stars Part III: AI Demand, Offshore Financing, &amp; Compression Too</a></h3>
+  <p class="article-stats">@michaeljburry · 2.0M 粉丝 · 209.2K 阅 · 508 赞 · 51 转</p>
+  <p class="article-meta">07/08 08:23</p>
+  <p class="article-excerpt">“They are just flying empty airplanes around.” - Son NVIDIA is the North Star, Orion, the whole Milky Way. NVIDIA is benefitting from strong demand, but is selling into a concentrated set of buyers</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Michael Burry 分析 AI 需求、离岸融资与压缩现象，指出 NVIDIA 虽受益于强劲需求，但销售集中在少数买家手中，如同「空飞机绕圈」。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/GoogleAIStudio/status/2074533418004591077" target="_blank" rel="noopener noreferrer">Expanding Managed Agents in Gemini API:  background tasks, remote MCP and more</a></h3>
+  <p class="article-stats">@GoogleAIStudio · 184.1K 粉丝 · 165.4K 阅 · 504 赞 · 62 转</p>
+  <p class="article-meta">07/08 00:38</p>
+  <p class="article-excerpt">Today we’re announcing new capabilities in Managed Agents in Gemini API, including background execution, remote MCP server integration, custom function calling and refreshing credentials across</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Google AI Studio 宣布 Gemini API 中 Managed Agents 新能力：支持后台运行、远程 MCP 服务器集成、自定义函数调用及跨会话凭证刷新。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/alex_prompter/status/2074198124898181121" target="_blank" rel="noopener noreferrer">You have 1 day to clone Fable 5 into Opus 4.8.</a></h3>
+  <p class="article-stats">@alex_prompter · 277.4K 粉丝 · 125.9K 阅 · 595 赞 · 77 转</p>
+  <p class="article-meta">07/07 02:25</p>
+  <p class="article-excerpt">Tomorrow is the last day Fable 5 sits inside your plan for free. After July 7 it moves to pay-per-use credits, and most people are about to spend the week arguing over whether it&#39;s worth keeping. That</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> alex_prompter 提醒 Fable 5 即将转为付费使用（7月7日起），给出一天内将 Fable 5 的智能「克隆」到 Opus 4.8 的实战策略。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/ClaudeDevs/status/2074900291062034618" target="_blank" rel="noopener noreferrer">Model and effort in Claude Code: knowing more vs. trying harder</a></h3>
+  <p class="article-stats">@ClaudeDevs · 564.6K 粉丝 · 95.9K 阅 · 1.5K 赞 · 100 转</p>
+  <p class="article-meta">07/09 00:55</p>
+  <p class="article-excerpt">Claude Code gives you two settings that both seem to &quot;make the answer better&quot;: the model, and the effort level. But what do these actually do to the output? And how do you know whether to reach for a</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> ClaudeDevs 解析 Claude Code 中模型选择与 effort 等级两个设置的差异：前者决定「知道更多」，后者决定「更努力」，并给出何时该用哪个的建议。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/EXM7777/status/2074158459545854232" target="_blank" rel="noopener noreferrer">Do this on your last day with Fable</a></h3>
+  <p class="article-stats">@EXM7777 · 123.5K 粉丝 · 86.9K 阅 · 510 赞 · 37 转</p>
+  <p class="article-meta">07/06 23:48</p>
+  <p class="article-excerpt">You can extract Fable 5&#39;s intelligence out of the model before it&#39;s gone... and i&#39;m going to teach you the 5 workflows that do it, with every prompt ready to paste because tomorrow Fable 5 leaves your</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> EXM7777 在 Fable 5 即将下架前，分享 5 个工作流与完整 prompt，教你将其智能提取出来，不因模型消失而丢失价值。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/free_ai_guides/status/2074531958600638877" target="_blank" rel="noopener noreferrer">You can go from zero to hireable AI engineer in 4 months. Here&#39;s the exact path. </a></h3>
+  <p class="article-stats">@free_ai_guides · 11.1K 粉丝 · 59.1K 阅 · 503 赞 · 114 转</p>
+  <p class="article-meta">07/08 00:32</p>
+  <p class="article-excerpt">AI engineering is one of the best-paid, fastest-growing jobs in tech right now. And the door to it just got wider than it&#39;s ever been. Most guides get this wrong. They hand you a wall of theory, tell</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> free_ai_guides 给出一个从零到可雇佣 AI 工程师的 4 个月精确路径，批评那些只给理论不做实践的常见指南。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/JIACHENLIU8/status/2074558254328455577" target="_blank" rel="noopener noreferrer">How to Distill a $10M+ AI Researcher </a></h3>
+  <p class="article-stats">@JIACHENLIU8 · 2.9K 粉丝 · 48.9K 阅 · 508 赞 · 28 转</p>
+  <p class="article-meta">07/08 02:16</p>
+  <p class="article-excerpt">tldr: Research Process &gt; Research Outcomes Everyone says the best researchers have great intuition. They seem to know which questions are worth asking before the field recognizes them as important.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> JIACHENLIU8 强调顶级 AI 研究者的核心是「研究过程＞研究结果」，并拆解如何提炼出那套正确提问的直觉。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/unicity_labs/status/2074861638948110353" target="_blank" rel="noopener noreferrer">Unicity Labs and Quant Partner to Bring Verifiable Execution to Agentic Trading</a></h3>
+  <p class="article-stats">@unicity_labs · 127.3K 粉丝 · 4.5K 阅 · 520 赞 · 827 转</p>
+  <p class="article-meta">07/08 22:22</p>
+  <p class="article-excerpt">Today we&#39;re announcing a partnership between Unicity Labs and @tryquantio to build the secure foundation for agentic finance. Quant - the AI intelligence and execution layer for the agentic future</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Unicity Labs 与 Quant 合作，为 agent 化交易构建可验证执行层，旨在为 agent 金融提供安全基础。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://x.com/krudhrah/status/2074526679041761332" target="_blank" rel="noopener noreferrer">A Google Knowledge Panel Isn&#39;t a Vanity Badge. Here&#39;s What It Actually Is - and How I Earned Mine.</a></h3>
+  <p class="article-stats">@krudhrah · 1.2K 粉丝 · 1.3K 阅 · 517 赞</p>
+  <p class="article-meta">07/08 00:11</p>
+  <p class="article-excerpt">Search my name — &quot;Rudhrah Keshav&quot; — and Google doesn&#39;t just show you links. It shows you a panel: my photo, my profession, my date of birth, my education, my podcast, my profiles. All assembled by</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> krudhrah 解释 Google 知识面板并非虚荣徽章，并分享自己如何获得该面板——包含照片、职业、教育、播客等信息的汇总卡片。</p>
+</article>
+  </div>
+    </div>
+  </div>
+<div class="sub-content" data-sub-content="ai-news" data-cat="tech">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="_merged" data-sub="ai-news" data-cat="tech">
+    <article class="article">
+  <h3 class="article-title"><a href="https://www.latent.space/p/modal2026" target="_blank" rel="noopener noreferrer">Why AI Infrastructure must evolve for Agent Experience — Akshat Bubna, Modal CTO</a></h3>
+  
+  <p class="article-meta">Latent Space · 07/09 06:55</p>
+  <p class="article-excerpt">2 years after our first coverage, we return with Modal&#39;s other cofounder to explore why Agent Experience is working now, and everything they have learned building the new agent cloud.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Modal CTO Akshat Bubna 认为AI基础设施必须为Agent体验而演进。文章是首次报道两年后的回访，探讨Agent体验当前有效的原因，并分享构建新型Agent云的经验教训。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://openai.com/index/government-national-security-partnerships" target="_blank" rel="noopener noreferrer">Our approach to government and national security partnerships</a></h3>
+  
+  <p class="article-meta">OpenAI News · 07/08 21:30</p>
+  <p class="article-excerpt">Learn how OpenAI approaches government and national security partnerships, with principles for responsible AI use, democratic accountability, and public safety.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> OpenAI 阐述其政府与国家安全合作的方法，强调负责任AI使用、民主问责制和公共安全原则。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://openai.com/index/separating-signal-from-noise-coding-evaluations" target="_blank" rel="noopener noreferrer">Separating signal from noise in coding evaluations</a></h3>
+  
+  <p class="article-meta">OpenAI News · 07/08 21:00</p>
+  <p class="article-excerpt">A new analysis from OpenAI reveals issues in SWE-Bench Pro, a popular coding benchmark, raising concerns about reliability and accuracy in evaluating AI models.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> OpenAI 新分析指出流行编程基准 SWE-Bench Pro 存在缺陷，引发对其评估AI模型可靠性与准确性的担忧。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://openai.com/index/k-12-educators-practical-skills" target="_blank" rel="noopener noreferrer">Helping K–12 educators build practical AI skills</a></h3>
+  
+  <p class="article-meta">OpenAI News · 07/08 18:00</p>
+  <p class="article-excerpt">OpenAI Academy and the Walton Family Foundation are bringing hands-on AI Skills Jams to help K–12 educators build practical AI skills for the classroom.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> OpenAI Academy 与 Walton Family Foundation 合作推出动手实践的 AI Skills Jams，帮助K-12教育工作者建立课堂实用AI技能。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.latent.space/p/ainews-lilian-weng-summarizes-35" target="_blank" rel="noopener noreferrer">[AINews] Lilian Weng summarizes 35 papers on Harness Engineering for RSI</a></h3>
+  
+  <p class="article-meta">Latent Space · 07/08 10:20</p>
+  <p class="article-excerpt">a quiet day lets us read some condensed insight</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Lilian Weng 总结35篇关于 Harness Engineering for RSI 的论文，提供浓缩洞见。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://openai.com/index/introducing-gpt-live" target="_blank" rel="noopener noreferrer">Introducing GPT-Live</a></h3>
+  
+  <p class="article-meta">OpenAI News · 07/08 08:00</p>
+  <p class="article-excerpt">A new generation of voice models for natural human-AI interaction, now powering ChatGPT Voice.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> OpenAI 推出新一代语音模型 GPT-Live，用于自然的人机交互，现已为 ChatGPT Voice 提供支持。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://tldr.tech/ai/2026-07-08" target="_blank" rel="noopener noreferrer">GPT-5.6 Thursday ⭐️, Claude Cowork mobile 📱, Gemini API agents 🤖</a></h3>
+  
+  <p class="article-meta">TLDR AI · 07/08 08:00</p>
+  
+  <p class="article-summary"><span class="summary-label">中文介绍</span> TLDR AI 报道：GPT-5.6 将于本周四发布；Anthropic 的 Claude Cowork 推出移动端应用；Google Gemini API 新增智能体功能。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.latent.space/p/ainews-the-field-guide-to-fable" target="_blank" rel="noopener noreferrer">[AINews] The Field Guide to Fable</a></h3>
+  
+  <p class="article-meta">Latent Space · 07/07 12:44</p>
+  <p class="article-excerpt">a quiet day lets us digest the world&#39;s most significant model launch... to date.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 该报道是“Fable”模型的实地指南，认为这是迄今为止最重要的模型发布。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://openai.com/index/australian-payments-plus" target="_blank" rel="noopener noreferrer">Australian Payments Plus moves faster with ChatGPT and Codex</a></h3>
+  
+  <p class="article-meta">OpenAI News · 07/07 08:00</p>
+  <p class="article-excerpt">See how Australian Payments Plus uses ChatGPT Enterprise and Codex to move faster through payments complexity. AP+ saves time, improves quality, and keeps human judgment central.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 澳大利亚支付公司 Australian Payments Plus 采用 ChatGPT Enterprise 和 Codex 加速处理支付复杂性，节省时间、提升质量，同时保留人工判断。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://openai.com/index/mufg" target="_blank" rel="noopener noreferrer">MUFG aims to become AI-native with OpenAI</a></h3>
+  
+  <p class="article-meta">OpenAI News · 07/07 08:00</p>
+  <p class="article-excerpt">MUFG uses ChatGPT Enterprise to build an AI-native organization, improve workflows, and deliver new AI-powered financial services at scale.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 日本三菱日联金融集团（MUFG）借助 ChatGPT Enterprise 打造 AI 原生组织，优化工作流程，大规模提供 AI 驱动的金融服务。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://tldr.tech/ai/2026-07-07" target="_blank" rel="noopener noreferrer">Anthropic J-space research 🧠, Apple + Broadcom ⚡, continual agent learning 🤖</a></h3>
+  
+  <p class="article-meta">TLDR AI · 07/07 08:00</p>
+  
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Anthropic 开展 J-space 研究；苹果与博通宣布合作；持续智能体学习成为焦点。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://news.smol.ai/issues/26-07-06-not-much/" target="_blank" rel="noopener noreferrer">not much happened today</a></h3>
+  
+  <p class="article-meta">Smol AI News · 07/06 13:44</p>
+  <p class="article-excerpt">**Tencent** released **Hy3**, a **295B MoE** open-weight model with **21B active parameters**, **192 experts**, and **256K context** supporting **MTP speculative decoding**. It runs natively on **vLLM** with optimizations for **NVIDIA** and **AMD** hardware, achieving up to **2.95x** speedups and la</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> 腾讯发布 Hy3 开源模型，295B MoE 架构，21B 活跃参数，192 专家，256K 上下文，支持 MTP 投机解码，针对 NVIDIA 和 AMD 硬件优化。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://tldr.tech/ai/2026-07-06" target="_blank" rel="noopener noreferrer">Seedance 2.5 🎥, guide to Fable ✨, OpenAI preps GPT-5.6 🚀</a></h3>
+  
+  <p class="article-meta">TLDR AI · 07/06 08:00</p>
+  
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Seedance 2.5 发布；Fable 模型指南上线；OpenAI 准备推出 GPT-5.6。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://deepmind.google/blog/google-deepmind-and-a24-announce-first-of-its-kind-research-partnership/" target="_blank" rel="noopener noreferrer">Google DeepMind and A24 announce first-of-its-kind research partnership</a></h3>
+  
+  <p class="article-meta">DeepMind Blog · 07/03 22:25</p>
+  
+  <p class="article-summary"><span class="summary-label">中文介绍</span> Google DeepMind 与电影公司 A24 宣布首次研究合作，具体细节尚未披露。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.latent.space/p/aiewf-daily-dispatch-locomotives" target="_blank" rel="noopener noreferrer">AIEWF Daily Dispatch: The great loops debate and the state of AI engineering</a></h3>
+  
+  <p class="article-meta">Latent Space · 07/03 13:11</p>
+  <p class="article-excerpt">The AI Engineer World’s Fair ended with a debate about loops, a report on the state of AI engineering, and closing keynotes focused on what to build next.</p>
+  <p class="article-summary"><span class="summary-label">中文介绍</span> AI 工程师世界博览会（AIEWF）闭幕，围绕“循环”展开辩论，发布 AI 工程现状报告，闭幕主题演讲聚焦下一步建设方向。</p>
+</article>
+  </div>
+    </div>
+  </div></div>
+  </section>
+  <section class="panel" data-panel="trading"><section class="trading-overview-card">
+    <span class="eyebrow">市场总览</span>
+    <p class="overview-text trading-overview-text">本日市场技术面呈现分化：美股方面，标普500 ETF（SPY）维持多头排列，RSI 52.9，MACD金叉，接近52周高，但纳指100 ETF（QQQ）5日跌3.39%，RSI 47.9，MACD死叉，趋势混沌；加密市场受恐慌情绪主导，加密恐慌贪婪指数仅20（极度恐慌），总市值2.23T USD 24h跌1.61%，BTC-USD、ETH-USD均处于空头排列，RSI分别为45.9和51.7，MACD绿柱但动能弱；中概股短期反弹强劲，阿里巴巴（BABA）单日涨11.05%，但价格仍低于SMA50和SMA200，空头排列未改；商品方面，黄金期货（GC=F）RSI 40.3接近超卖，MACD金叉但价格低于所有均线，空头排列明确，原油期货（CL=F）RSI 42.8，MACD金叉，趋势中性，美元指数（DXY）RSI 60.2，MACD死叉但价格站上均线，接近52周高。总体看，美股核心指数和加密资产呈现下行压力，中概和部分商品有超跌反弹迹象，但中期趋势多空不一。</p>
+  </section>
+
+  <section class="trading-watchlist">
+    <h2 class="category-title trading-section-title">今日关注</h2>
+    <div class="trading-picks">
+      <article class="trading-pick stance-bull">
+    <header class="pick-head">
+      <div class="pick-symbol-block">
+        <span class="pick-symbol">AAPL</span>
+        <span class="pick-name">Apple</span>
+      </div>
+      <span class="pick-stance pick-stance-bull">偏上行</span>
+    </header>
+    <p class="pick-rationale">Apple当前价格313.39美元，RSI为62.2（偏强未超买），MACD金叉（macd 2.959 &gt; signal 0.5291），价格站稳所有均线（sma20 295.63、sma50 295.9、sma200 271.8），呈多头排列，5日涨幅8.3%，且距52周高仅-1.26%，短期技术指标偏多。</p>
+  </article>
+<article class="trading-pick stance-bear">
+    <header class="pick-head">
+      <div class="pick-symbol-block">
+        <span class="pick-symbol">BTC-USD</span>
+        <span class="pick-name">Bitcoin</span>
+      </div>
+      <span class="pick-stance pick-stance-bear">偏下行</span>
+    </header>
+    <p class="pick-rationale">Bitcoin当前62165.28美元，RSI为45.9（低于50），价格低于sma50（65919.91）和sma200（74351.3），空头排列明确，MACD绿柱（macd -745.61）但仍在信号线（-1353.80）上方，空头动能未消，距52周高跌幅50.74%，加密恐慌指数20极度恐慌，技术面偏空。</p>
+  </article>
+<article class="trading-pick stance-neutral">
+    <header class="pick-head">
+      <div class="pick-symbol-block">
+        <span class="pick-symbol">BABA</span>
+        <span class="pick-name">阿里巴巴 (BABA)</span>
+      </div>
+      <span class="pick-stance pick-stance-neutral">中性</span>
+    </header>
+    <p class="pick-rationale">阿里巴巴单日涨11.05%，5日涨13.54%，RSI 50.9（中性），MACD金叉（macd -6.3242 &gt; signal -7.4958），但价格仍低于sma50（120.93）和sma200（146.15），空头排列未扭转，短期动能与中期趋势矛盾，故中性看待。</p>
+  </article>
+    </div>
+  </section>
+
+  <section class="trading-tickers">
+    <h2 class="category-title trading-section-title">全部资产</h2>
+    <nav class="trading-group-tabs"><button class="trading-group-tab active" data-group="macro">宏观信号<span class="count">3</span></button><button class="trading-group-tab" data-group="us-equity">美股 / ETF<span class="count">8</span></button><button class="trading-group-tab" data-group="crypto">加密货币<span class="count">3</span></button><button class="trading-group-tab" data-group="china-equity">中概 / 港股<span class="count">4</span></button><button class="trading-group-tab" data-group="commodity-fx">商品 / 外汇<span class="count">3</span></button></nav>
+    <div class="trading-group-contents"><div class="trading-group-content active" data-group="macro">
+      
+      <article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">^VIX</h3>
+        <p class="ticker-name">VIX 恐慌指数</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$16.90</span>
+        <span class="ticker-pct positive">+4.77%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+2.74%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-52.1%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">48.0</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>17.74 / 17.48 / 18.68</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.408 / -0.227</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">^TNX</h3>
+        <p class="ticker-name">10Y 美债收益率 (%)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$4.57</span>
+        <span class="ticker-pct positive">+0.88%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+4.46%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-2.5%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">61.5</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bullish">多头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>4.47 / 4.47 / 4.24</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.007 / -0.003</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(1 天前)</span></span><span class="signal-pill tone-bull">接近 52 周高</span><span class="signal-pill tone-bull">多头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">DX-Y.NYB</h3>
+        <p class="ticker-name">美元指数 DXY</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$101.07</span>
+        <span class="ticker-pct negative">-0.07%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-0.12%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-0.7%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">60.2</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bullish">多头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>100.70 / 99.60 / 98.90</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.448 / 0.499</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">MACD 死叉 <span class="signal-age">(2 天前)</span></span><span class="signal-pill tone-bull">接近 52 周高</span><span class="signal-pill tone-bull">多头排列</span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="us-equity">
+      
+      <article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">SPY</h3>
+        <p class="ticker-name">S&amp;P 500 ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$745.40</span>
+        <span class="ticker-pct negative">-0.31%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-0.18%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-2.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">52.9</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bullish">多头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>741.60 / 739.64 / 693.60</dd></div>
+      <div><dt>MACD / 信号</dt><dd>2.160 / 1.862</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(2 天前)</span></span><span class="signal-pill tone-bull">接近 52 周高</span><span class="signal-pill tone-bull">多头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">QQQ</h3>
+        <p class="ticker-name">Nasdaq 100 ETF</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$711.44</span>
+        <span class="ticker-pct positive">+0.28%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-3.39%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-5.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">47.9</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>720.20 / 712.62 / 636.77</dd></div>
+      <div><dt>MACD / 信号</dt><dd>1.033 / 3.649</dd></div>
+    </dl>
+    
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">AAPL</h3>
+        <p class="ticker-name">Apple</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$313.39</span>
+        <span class="ticker-pct positive">+0.88%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+8.30%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-1.3%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">62.2</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bullish">多头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>295.63 / 295.90 / 271.80</dd></div>
+      <div><dt>MACD / 信号</dt><dd>2.959 / 0.529</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(3 天前)</span></span><span class="signal-pill tone-bull">接近 52 周高</span><span class="signal-pill tone-bull">多头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">MSFT</h3>
+        <p class="ticker-name">Microsoft</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$383.34</span>
+        <span class="ticker-pct negative">-1.41%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+2.77%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-31.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">46.5</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>382.08 / 405.31 / 443.59</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-6.815 / -9.274</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(3 天前)</span></span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">NVDA</h3>
+        <p class="ticker-name">Nvidia</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$204.12</span>
+        <span class="ticker-pct positive">+3.65%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+2.01%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-13.7%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">51.0</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>201.69 / 209.52 / 191.40</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-3.295 / -3.410</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(今天)</span></span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">GOOGL</h3>
+        <p class="ticker-name">Alphabet</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$361.92</span>
+        <span class="ticker-pct negative">-1.39%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+1.27%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-11.4%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">50.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>358.11 / 372.43 / 317.87</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-1.834 / -3.606</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(3 天前)</span></span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">TSLA</h3>
+        <p class="ticker-name">Tesla</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$394.06</span>
+        <span class="ticker-pct negative">-2.19%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-6.31%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-21.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">47.1</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>399.07 / 408.00 / 418.37</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.944 / -1.904</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">META</h3>
+        <p class="ticker-name">Meta</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$603.12</span>
+        <span class="ticker-pct negative">-2.02%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+7.07%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-24.3%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">53.9</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>577.35 / 601.43 / 643.93</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.846 / -7.535</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(4 天前)</span></span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="crypto">
+      <div class="crypto-widgets"><div class="crypto-widget fg-fear-extreme">
+      <div class="widget-label">加密恐慌贪婪</div>
+      <div class="widget-value">20</div>
+      <div class="widget-sub">极度恐慌</div>
+    </div><div class="crypto-widget">
+      <div class="widget-label">加密总市值</div>
+      <div class="widget-value">$2.23 T</div>
+      <div class="widget-sub negative">-1.61% / 24h</div>
+    </div><div class="crypto-widget">
+      <div class="widget-label">BTC 主导率</div>
+      <div class="widget-value">56.0%</div>
+      <div class="widget-sub">ETH 9.4%</div>
+    </div><div class="crypto-widget">
+      <div class="widget-label">24h 成交量</div>
+      <div class="widget-value">$69.9 B</div>
+      <div class="widget-sub">活跃币 17,334</div>
+    </div></div>
+      <article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">BTC-USD</h3>
+        <p class="ticker-name">Bitcoin</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$62,165.28</span>
+        <span class="ticker-pct negative">-1.79%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-0.61%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-50.7%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">45.9</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>61,833.41 / 65,919.91 / 74,351.30</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-745.612 / -1,353.795</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">ETH-USD</h3>
+        <p class="ticker-name">Ethereum</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$1,739.96</span>
+        <span class="ticker-pct negative">-1.61%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-0.94%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-64.9%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">51.7</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>1,678.08 / 1,787.15 / 2,245.45</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-2.961 / -29.939</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">SOL-USD</h3>
+        <p class="ticker-name">Solana</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$77.49</span>
+        <span class="ticker-pct negative">-3.92%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="negative">-5.82%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-69.4%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">53.4</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>74.89 / 75.02 / 92.68</dd></div>
+      <div><dt>MACD / 信号</dt><dd>2.060 / 1.243</dd></div>
+    </dl>
+    
+  </article>
+    </div><div class="trading-group-content" data-group="china-equity">
+      
+      <article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">BABA</h3>
+        <p class="ticker-name">阿里巴巴 (BABA)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$108.98</span>
+        <span class="ticker-pct positive">+11.05%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+13.54%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-43.4%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">50.9</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>104.33 / 120.93 / 146.15</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-6.324 / -7.496</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(1 天前)</span></span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">PDD</h3>
+        <p class="ticker-name">拼多多 (PDD)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$84.74</span>
+        <span class="ticker-pct positive">+2.68%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+11.09%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-39.2%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">54.2</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>80.01 / 88.48 / 107.71</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-1.578 / -2.965</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">JD</h3>
+        <p class="ticker-name">京东 (JD)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$27.63</span>
+        <span class="ticker-pct positive">+4.30%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+8.44%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-25.0%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">51.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>27.00 / 29.05 / 29.82</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.729 / -0.932</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(2 天前)</span></span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">0700.HK</h3>
+        <p class="ticker-name">腾讯控股 (0700.HK)</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">HK$478.80</span>
+        <span class="ticker-pct positive">+3.82%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+11.40%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-29.9%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">63.2</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>442.27 / 452.18 / 555.79</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-0.709 / -6.353</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(2 天前)</span></span></div>
+  </article>
+    </div><div class="trading-group-content" data-group="commodity-fx">
+      
+      <article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">GC=F</h3>
+        <p class="ticker-name">黄金期货</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$4,085.70</span>
+        <span class="ticker-pct negative">-1.44%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+1.56%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-26.9%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">40.3</dd></div>
+      <div><dt>趋势</dt><dd class="trend-bearish">空头</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>4,146.95 / 4,394.19 / 4,463.14</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-89.963 / -104.865</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">死叉(SMA50↓SMA200) <span class="signal-age">(4 天前)</span></span><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(3 天前)</span></span><span class="signal-pill tone-bear">空头排列</span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">CL=F</h3>
+        <p class="ticker-name">WTI 原油期货</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">$74.47</span>
+        <span class="ticker-pct positive">+5.72%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+7.15%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-37.7%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">42.8</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>75.58 / 88.94 / 74.13</dd></div>
+      <div><dt>MACD / 信号</dt><dd>-5.476 / -5.971</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bull">MACD 金叉 <span class="signal-age">(今天)</span></span></div>
+  </article><article class="ticker-card">
+    <header class="ticker-head">
+      <div class="ticker-id">
+        <h3 class="ticker-symbol">USDCNY=X</h3>
+        <p class="ticker-name">美元 / 人民币</p>
+      </div>
+      <div class="ticker-price-block">
+        <span class="ticker-price">¥6.80</span>
+        <span class="ticker-pct positive">+0.13%</span>
+      </div>
+    </header>
+    <dl class="ticker-indicators">
+      <div><dt>5 日</dt><dd class="positive">+0.11%</dd></div>
+      <div><dt>距 52w 高</dt><dd>-5.7%</dd></div>
+      <div><dt>RSI(14)</dt><dd class="rsi-normal">61.8</dd></div>
+      <div><dt>趋势</dt><dd class="trend-neutral">中性</dd></div>
+      <div><dt>SMA 20 / 50 / 200</dt><dd>6.78 / 6.79 / 6.94</dd></div>
+      <div><dt>MACD / 信号</dt><dd>0.003 / 0.001</dd></div>
+    </dl>
+    <div class="ticker-signals"><span class="signal-pill tone-bear">接近 52 周低</span></div>
+  </article>
+    </div></div>
+  </section>
+
+  <section class="trading-risk">
+    <span class="eyebrow">风险提示</span>
+    <p>过去走势不代表未来表现，本报告仅基于历史数据的技术指标解读参考，不构成任何投资建议。市场存在不确定性，投资者应独立判断风险。</p>
+  </section></section>
+  <section class="panel" data-panel="politics">
+    <div class="sub-content active" data-sub-content="world" data-cat="politics">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="_merged" data-sub="world" data-cat="politics">
+    <article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/nx-s1-5886102/trump-threatens-iran-as-nato-summit-wraps" target="_blank" rel="noopener noreferrer">Trump threatens Iran as NATO summit wraps</a></h3>
+  
+  <p class="article-meta">NPR World · 07/09 04:02</p>
+  <p class="article-excerpt">President Trump threatened more strikes against Iran after saying he believes the ceasefire is dead at the end of the NATO summit.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 特朗普在北约峰会结束时表示，他认为与伊朗的停火已“死亡”，并威胁对伊朗发动更多打击。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/g-s1-132497/passports-trump-image" target="_blank" rel="noopener noreferrer">New U.S. passports with Trump&#39;s image are available. Here&#39;s how to get (or avoid) one</a></h3>
+  
+  <p class="article-meta">NPR World · 07/09 01:27</p>
+  <p class="article-excerpt">The passports feature an image of President Trump and are only available in person at the Washington Passport Agency — and only by appointment.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 新版美国护照印有特朗普总统头像，仅限预约后在华盛顿护照局亲自办理。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/nx-s1-5884694/syria-church-interfaith-fruit" target="_blank" rel="noopener noreferrer">Greetings from a Syrian church, infused with a mix of sweet fruit and diverse faiths</a></h3>
+  
+  <p class="article-meta">NPR World · 07/08 23:05</p>
+  <p class="article-excerpt">Syria&#39;s Mar Musa monastery provides the tastiest mulberries, and its services draw from Eastern Orthodox Christian and Sufi customs.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 叙利亚马尔穆萨修道院提供最甜美的桑葚，其礼拜仪式融合了东正教和苏菲派传统。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/g-s1-132474/up-first-newsletter-trump-iran-ceasefire-nato-graham-platner-ioc-russia" target="_blank" rel="noopener noreferrer">Trump says he believes the Iran ceasefire is &#39;over.&#39; And, IOC lifts Russia&#39;s suspension</a></h3>
+  
+  <p class="article-meta">NPR World · 07/08 19:15</p>
+  <p class="article-excerpt">Trump said that he believes the U.S.-Iran ceasefire is over, but hasn&#39;t ruled out talks. And, the International Olympic Committee paves the way for Russian athletes to compete in the 2028 games.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 特朗普称美伊停火已“结束”，但未排除谈判可能。国际奥委会为俄罗斯运动员参加2028年奥运会铺平道路。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/nx-s1-5883929/trump-nato-iran-strikes-press-conference" target="_blank" rel="noopener noreferrer">Trump says ceasefire with Iran is &#39;over&#39; as NATO summit wraps</a></h3>
+  
+  <p class="article-meta">NPR World · 07/08 17:12</p>
+  <p class="article-excerpt">President Trump said he believes the current ceasefire with Iran is over following an exchange of attacks between the U.S. and Iran in the latest escalation straining the agreement to end the war.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 特朗普在北约峰会结束时表示，美伊最新交火使停火协议承压，他认为当前停火已“结束”。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/nx-s1-5884779/trump-says-ceasefire-between-the-u-s-and-iran-is-over" target="_blank" rel="noopener noreferrer">Trump says ceasefire between the U.S. and Iran is over</a></h3>
+  
+  <p class="article-meta">NPR World · 07/08 16:52</p>
+  <p class="article-excerpt">Speaking to the press from Turkey, President Trump said Wednesday morning that the ceasefire between the U.S. and Iran is over. But he didn&#39;t rule out talks continuing to end the war with Iran.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 特朗普在土耳其对媒体表示，美伊停火已结束，但他并未排除继续谈判以结束战争的可能性。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/nx-s1-5884818/the-state-of-the-nato-alliance-amid-trumps-second-term" target="_blank" rel="noopener noreferrer">The state of the NATO alliance amid Trump&#39;s second term</a></h3>
+  
+  <p class="article-meta">NPR World · 07/08 16:52</p>
+  <p class="article-excerpt">Carl Bildt, co-chair of the European Council on Foreign Relations, talks about the ongoing NATO summit in Ankara, Turkey, and the state of the alliance during President Trump&#39;s second term.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 欧洲对外关系委员会联合主席卡尔·比尔特在土耳其安卡拉北约峰会期间，讨论了特朗普第二任期下北约联盟的现状。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/g-s1-132467/le-pen-court-ordered-monitor" target="_blank" rel="noopener noreferrer">Le Pen says she&#39;ll run for French presidency next year despite court-ordered monitor</a></h3>
+  
+  <p class="article-meta">NPR World · 07/08 15:01</p>
+  <p class="article-excerpt">Far-right leader Marine Le Pen says she&#39;ll run for the French presidency next year despite being sentenced Tuesday to wear a court-ordered electronic monitor for embezzlement.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 极右翼领导人玛丽娜·勒庞表示，尽管因挪用公款被判佩戴电子监控装置，她仍将参加明年法国总统选举。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.npr.org/2026/07/08/g-s1-132460/us-iran-attacks" target="_blank" rel="noopener noreferrer">Tehran targets Bahrain and Kuwait after U.S. strikes</a></h3>
+  
+  <p class="article-meta">NPR World · 07/08 13:36</p>
+  <p class="article-excerpt">The regional crossfire raised the risks that an interim agreement to halt fighting in the war could break down, putting the Middle East again at risk of a wider conflict.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 在美国对伊朗发动打击后，德黑兰袭击了巴林和科威特。地区交火使临时停火协议面临破裂风险，中东恐再次陷入更广泛冲突。</p>
+</article>
+  </div>
+    </div>
+  </div>
+  </section>
+  <section class="panel" data-panel="finance">
+    <div class="sub-content active" data-sub-content="news" data-cat="finance">
+    
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="_merged" data-sub="news" data-cat="finance">
+    <article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/nikkei-may-rise-as-weak-yen-raises-earnings-hopes-776a8056?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Stocks Sink in Broad AI Rout Sparked by China&#39;s DeepSeek</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/28 03:26</p>
+  <p class="article-excerpt">U.S. stocks were mostly lower, with the Nasdaq leading declines as makers of AI infrastructure suffered steep falls, many in the double digits. Nvidia was down 16%.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 美国股市多数下跌，纳指领跌，AI基础设施制造商暴跌，英伟达跌16%。中国DeepSeek引发广泛AI板块抛售。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Comex Gold, Silver Settle Lower</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/28 03:01</p>
+  <p class="article-excerpt">Gold settled 1.4% lower, down two of the past three sessions, and silver fell 2.5%, down three of the past four sessions.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 黄金期货结算价跌1.4%，过去三个交易日第二个下跌日；白银跌2.5%，过去四个交易日第三个下跌日。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/deepseek-us-ai-stocks-nvidia-broadcom-6cdfae81?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">DeepSeek Won&#39;t Sink U.S. AI Titans</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/28 02:12</p>
+  <p class="article-excerpt">Panic fueling the selloff of Nvidia, Broadcom and other tech giants is overblown.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 市场恐慌情绪过头，抛售英伟达、博通等科技巨头反应过度，DeepSeek不会击垮美国AI巨头。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/financial-services-roundup-market-talk-94f52cba?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Financial Services Roundup: Market Talk</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/28 01:27</p>
+  <p class="article-excerpt">Gain insight on Experian, SoFi Technologies and more in the latest Market Talks covering Financial Services.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 市场快讯涵盖Experian、SoFi Technologies等金融服务公司的最新动态。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/arabica-coffee-prices-hit-new-high-on-u-s-colombia-tariff-spat-582446fe?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Arabica Coffee Prices Hit Record on U.S., Colombia Tariff Spat</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/28 01:20</p>
+  <p class="article-excerpt">Arabica coffee prices hit a record level, as traders digested the withdrawal of President Trump’s threats to impose tariffs and economic sanctions on Colombia.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 阿拉比卡咖啡价格创新高，因特朗普撤回对哥伦比亚的关税和制裁威胁，交易员消化这一消息。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/safe-haven-currencies-strengthen-amid-fears-over-global-tariffs-9964e17a?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Swiss franc, Japanese yen Rise as DeepSeek News Boosts Safe Havens</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/27 22:55</p>
+  <p class="article-excerpt">The Yen and Swiss Franc were stronger against the dollar as investors sought safe havens after Chinese start-up DeepSeek’s new AI model hit U.S. tech stocks.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 日元和瑞士法郎兑美元走强，因DeepSeek AI模型冲击美股后投资者寻求避险。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/u-s-natural-gas-futures-fall-on-shifting-weather-forecasts-1ef3e457?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Natural Gas Falls on Shifting Weather Forecasts</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/27 22:05</p>
+  <p class="article-excerpt">U.S. natural gas futures fell after weekend updates took some of the chill out of early February weather forecasts.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 美国天然气期货下跌，因周末预报显示2月初天气不那么寒冷。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/building-products-distributor-qxo-launching-hostile-bid-for-beacon-de024410?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Building-Products Distributor QXO Launches Hostile Bid for Beacon</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/27 21:28</p>
+  <p class="article-excerpt">QXO is taking its offer directly to shareholders after being rebuffed on several occasions.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 建筑材料分销商QXO向Beacon股东发起敌意收购要约，此前多次被拒绝。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/natural-gas-firm-diversified-energy-nears-deal-for-permian-basin-player-4c1c5ff5?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Natural-Gas Firm Diversified Energy Strikes Deal for Permian Basin Player</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/27 19:57</p>
+  <p class="article-excerpt">Maverick Natural Resources has operations in Texas and Oklahoma.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 天然气公司Diversified Energy达成协议收购Maverick Natural Resources，后者在得州和俄克拉荷马州有业务。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/tax-season-2024-irs-filing-dates-explained-628a8b37?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">What&#39;s New This Tax Season That Can Save You Money</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/27 18:30</p>
+  <p class="article-excerpt">There are some new wrinkles, especially for those who sell things online or bought an EV.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 报税季新变化：在线销售平台卖家、购买电动车等可能有省税机会。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/chinese-investors-with-few-options-turn-to-dividends-ad31dcc4?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">Chinese Investors With Few Options Turn to Dividends</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/27 18:30</p>
+  <p class="article-excerpt">Companies with good payouts are now the hottest bet in China markets.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 投资选择有限的中国投资者转向高股息股票，派息公司成为A股市场热门。</p>
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.wsj.com/articles/jgbs-consolidate-supported-by-u-s-treasurys-gains-7edccc7d?mod=rss_markets_main" target="_blank" rel="noopener noreferrer">U.S. Treasury Yields Fall But Direction for Long-End Yields Still Seen Upward</a></h3>
+  
+  <p class="article-meta">WSJ Markets · 01/27 18:02</p>
+  <p class="article-excerpt">The 10-year U.S. Treasury yield fell and ING said the the long end of the Treasury curve will continue trading at higher yields even as Trump hasn’t delivered anything to shock markets so far.</p>
+  <p class="article-summary"><span class="summary-label">中文摘要</span> 美国10年期国债收益率下跌，但荷兰国际集团认为长期收益率仍将上行，尽管特朗普未带来市场冲击。</p>
+</article>
+  </div>
+    </div>
+  </div>
+  </section>
+  <section class="panel" data-panel="community">
+    <div class="sub-content active" data-sub-content="cn-community" data-cat="tech">
+    <nav class="source-tabs"><button class="source-tab active" data-source="v2ex-hot" data-sub="cn-community" data-cat="tech">V2EX<span class="count">10</span></button><button class="source-tab" data-source="linuxdo" data-sub="cn-community" data-cat="tech">LinuxDo<span class="count">0</span></button></nav>
+    <div class="source-contents">
+      <div class="source-content active" data-source-content="v2ex-hot" data-sub="cn-community" data-cat="tech">
+    <article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225946" target="_blank" rel="noopener noreferrer">一个中登这两年的经历，希望大家看完后性格和职业规划上可以给点意见。</a></h3>
+  
+  <p class="article-meta">07/08 21:54</p>
+  <p class="article-excerpt">13 回复 · 程序员 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225928" target="_blank" rel="noopener noreferrer">明后天阿里就全面禁用 Claude 了，那他们用啥啊？</a></h3>
+  
+  <p class="article-meta">07/08 19:21</p>
+  <p class="article-excerpt">23 回复 · 程序员 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225900" target="_blank" rel="noopener noreferrer">claude code 还能继续用么？</a></h3>
+  
+  <p class="article-meta">07/08 16:59</p>
+  <p class="article-excerpt">9 回复 · 程序员 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225892" target="_blank" rel="noopener noreferrer">现在已经下钻到挣小白的 token 钱了。</a></h3>
+  
+  <p class="article-meta">07/08 16:35</p>
+  <p class="article-excerpt">11 回复 · 程序员 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225835" target="_blank" rel="noopener noreferrer">Apple 美区礼品卡购买问题</a></h3>
+  
+  <p class="article-meta">07/08 14:15</p>
+  <p class="article-excerpt">19 回复 · Apple 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225824" target="_blank" rel="noopener noreferrer">2026 年 07 月购买了 Quantumult X</a></h3>
+  
+  <p class="article-meta">07/08 13:46</p>
+  <p class="article-excerpt">37 回复 · Apple 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225820" target="_blank" rel="noopener noreferrer">iOS 有什么办法能屏蔽懂球帝的广告</a></h3>
+  
+  <p class="article-meta">07/08 13:39</p>
+  <p class="article-excerpt">15 回复 · Apple 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225746" target="_blank" rel="noopener noreferrer">卖还是不卖？</a></h3>
+  
+  <p class="article-meta">07/08 09:53</p>
+  <p class="article-excerpt">35 回复 · Apple 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225631" target="_blank" rel="noopener noreferrer">国行 iPhone air 在国内成功添加 giffgaff esim，顺便解锁了 apple news 等</a></h3>
+  
+  <p class="article-meta">07/07 17:37</p>
+  <p class="article-excerpt">14 回复 · Apple 节点</p>
+  
+</article>
+<article class="article">
+  <h3 class="article-title"><a href="https://www.v2ex.com/t/1225581" target="_blank" rel="noopener noreferrer">MAC 外接 32 寸显示器求推荐</a></h3>
+  
+  <p class="article-meta">07/07 14:52</p>
+  <p class="article-excerpt">8 回复 · Apple 节点</p>
+  
+</article>
+  </div>
+<div class="source-content" data-source-content="linuxdo" data-sub="cn-community" data-cat="tech">
+    <p class="empty">该源今日无内容。</p>
+  </div>
+    </div>
+  </div>
+  </section>
+
+  <footer>
+    内容均来自原媒体，本站仅作摘要整理与回链。
+  </footer>
+</main>
+<script>
+  document.querySelectorAll('.tabs > .tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = btn.dataset.tab;
+      document.querySelectorAll('.tabs > .tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      document.querySelectorAll('.panel').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.panel === target);
+      });
+    });
+  });
+  // Scope sub-tab / source-tab toggles to the parent .panel so two L1 panels
+  // can share the same data-cat (e.g. tech main + community both data-cat=tech)
+  // without stomping on each other's active state.
+  document.querySelectorAll('.sub-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel = btn.closest('.panel');
+      if (!panel) return;
+      var sub = btn.dataset.sub;
+      panel.querySelectorAll('.sub-tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      panel.querySelectorAll('.sub-content').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.subContent === sub);
+      });
+    });
+  });
+  document.querySelectorAll('.source-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var subContent = btn.closest('.sub-content');
+      if (!subContent) return;
+      var src = btn.dataset.source;
+      subContent.querySelectorAll('.source-tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      subContent.querySelectorAll('.source-content').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.sourceContent === src);
+      });
+    });
+  });
+  // Trading panel: asset-group sub-tabs (US/crypto/china/commodity)
+  document.querySelectorAll('.trading-group-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var grp = btn.dataset.group;
+      document.querySelectorAll('.trading-group-tab').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      document.querySelectorAll('.trading-group-content').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.group === grp);
+      });
+    });
+  });
+</script>
+</body>
+</html>
